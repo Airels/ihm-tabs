@@ -23,6 +23,5 @@ identiques auront la même couleur et toutes les valeurs différentes auront des
 - Application de filtre de coloration dépendante des valeurs de la cellule
   - Couleurs par défaut avec gradient de couleur selon la valeur
   - Choix des couleurs
-- 
 - Export de l'image sous différent format
 - Description des données

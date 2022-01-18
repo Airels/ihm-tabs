@@ -14,3 +14,15 @@ et/ou en vectoriel (SVG) sera apprécié accompagné de la description des donn�
 nombre de lignes et de colonnes, date de l’export…).
 Pour éviter toute confusion concernant la coloration et pour une colonne donnée, toutes les valeurs
 identiques auront la même couleur et toutes les valeurs différentes auront des couleurs différentes.
+
+# ROADMAP
+
+## Définition des parties à effectuer
+- Lecture de fichier contenant des données matriciel
+- Ordonnancement des valeurs selon la ou les colones de son choix
+- Application de filtre de coloration dépendante des valeurs de la cellule
+  - Couleurs par défaut avec gradient de couleur selon la valeur
+  - Choix des couleurs
+- 
+- Export de l'image sous différent format
+- Description des données

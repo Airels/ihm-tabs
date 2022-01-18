@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     cell.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tablewidget.cpp
 
 HEADERS += \
     cell.h \
-    mainwindow.h
+    mainwindow.h \
+    tablewidget.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    tablewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

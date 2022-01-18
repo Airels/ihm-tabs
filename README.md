@@ -1,4 +1,4 @@
-#Sujet
+# Sujet
 
 Cette application permettra d’afficher des données matricielles générées aléatoirement ou provenant
 de fichiers de données CSV, XLSX ou autres formats sous une forme tabulaire. Un premier affichage

@@ -17,7 +17,7 @@ public:
     const QString typeNames[6] = {"Min/Max", "Fixed", "Condition", "Machin", "Bidule", "Truc"};
 
     Filter();
-    virtual void apply(Cell cell);
+    virtual void apply(Cell cell) = 0;
 };
 
 #endif // FILTER_H

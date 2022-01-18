@@ -15,8 +15,6 @@ class TableWidget : public QWidget
 public:
     explicit TableWidget(QWidget *parent = nullptr);
     ~TableWidget();
-    void setCell(Cell cell, int x, int y);
-
 
 private:
     Ui::TableWidget *ui;

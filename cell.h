@@ -2,9 +2,12 @@
 #define CELL_H
 #include <QString>
 #include <QColor>
+#include <QApplication>
+#include <QStandardItem>
 
-class Cell
+class Cell: public QStandardItem
 {
+Q_OBJECT
 
 public:
     Cell(QString text, QColor color);

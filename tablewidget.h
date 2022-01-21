@@ -2,6 +2,7 @@
 #define TABLEWIDGET_H
 
 #include <QWidget>
+#include "cell.h"
 
 namespace Ui {
 class TableWidget;

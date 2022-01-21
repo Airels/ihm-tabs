@@ -10,12 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     cell.cpp \
+    datamanager.cpp \
+    filemanager.cpp \
+    filter.cpp \
     main.cpp \
     mainwindow.cpp \
     tablewidget.cpp
 
 HEADERS += \
     cell.h \
+    datamanager.h \
+    filemanager.h \
+    filter.h \
     mainwindow.h \
     tablewidget.h
 

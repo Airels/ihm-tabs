@@ -13,6 +13,7 @@ SOURCES += \
     datamanager.cpp \
     filemanager.cpp \
     filter.cpp \
+    fixedcolorfilter.cpp \
     main.cpp \
     mainwindow.cpp \
     tablewidget.cpp
@@ -22,6 +23,7 @@ HEADERS += \
     datamanager.h \
     filemanager.h \
     filter.h \
+    fixedcolorfilter.h \
     mainwindow.h \
     tablewidget.h
 

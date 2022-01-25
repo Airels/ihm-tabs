@@ -24,13 +24,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setEnabled(bool value) {
+    ui->_tabWidget->setEnabled(value);
+    ui->_activeFilter->setEnabled(value);
+    ui->_applyFilterBtn->setEnabled(value);
+    ui->_treeFilter->setEnabled(value);
+    if(!value) {
+        ui->_tabWidget->setCurrentIndex(0);
+        ui->_treeFilter->collapseAll();
+        for(QObject *child : ui->_activeFilter->children()) {
+            child->deleteLater();
+        }
+    }
+}
 
+/* SLOTS */
 void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
+    setEnabled(true);
 }
 
 void MainWindow::actionCloseFile() {
     qDebug() << "[USER ACTION] Close File";
+    setEnabled(false);
 }
 
 void MainWindow::actionSaveAs() {

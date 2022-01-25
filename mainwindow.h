@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setEnabled(bool);
 
 protected slots:
     void actionOpenFile();

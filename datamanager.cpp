@@ -14,19 +14,19 @@ void DataManager::apply_filter_fixed_color(int row, int col, QColor color) {
     if (row == -1 && col == -1) {
         for (int x = 0; x < row_max; x++) {
             for (int y = 0; y < col_max; y++) {
-                filter.apply((Cell *) cells.item(x, y));
+                filter.apply((Cell *) cells->item(x, y));
             }
         }
     } else if (row == -1) {
         for (int x = 0; x < row_max; x++) {
-            filter.apply((Cell *) cells.item(x, col));
+            filter.apply((Cell *) cells->item(x, col));
         }
     } else if (col == -1) {
         for (int y = 0; y < col_max; y++) {
-            filter.apply((Cell *) cells.item(row, y));
+            filter.apply((Cell *) cells->item(row, y));
         }
     } else {
-        filter.apply((Cell *) cells.item(row, col));
+        filter.apply((Cell *) cells->item(row, col));
     }
 }
 

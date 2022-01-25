@@ -1,6 +1,7 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <QObject>
 #include <QApplication>
 #include <cstring>
 #include <QFile>
@@ -9,7 +10,8 @@
 
 class FileManager : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
+    Q_DISABLE_COPY(FileManager)
 
 public:
     const QString acceptedFileTypes[3] = {
@@ -21,7 +23,7 @@ public:
 
 protected slots:
     void openFile(DataManager *dataManager);
-    void saveFile(QString filename, DataManager cells);
+    void saveFile(QString filename, DataManager *cells);
 
 private:
     QWidget * attachedWidget;

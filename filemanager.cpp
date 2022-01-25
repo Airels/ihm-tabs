@@ -1,4 +1,5 @@
 #include "filemanager.h"
+#include "datamanager.h"
 #include <QStandardPaths>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -46,7 +47,7 @@ void FileManager::openFile(DataManager *dataManager) {
     }
 }
 
-void FileManager::saveFile(QString filename, DataManager cells) {
+void FileManager::saveFile(QString filename, DataManager *cells) {
     exit(501);
 }
 

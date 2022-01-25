@@ -1,6 +1,7 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
+#include <QObject>
 #include <QApplication>
 #include <QStandardItemModel>
 #include "filter.h"
@@ -9,10 +10,12 @@
 
 class DataManager : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
+    Q_DISABLE_COPY(DataManager)
 
 public:
     DataManager();
+    ~DataManager();
     void set(Cell *cell, int row, int column);
     QStandardItemModel * getCells();
 

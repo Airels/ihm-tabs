@@ -3,16 +3,22 @@
 #include "filemanager.h"
 #include <QDebug>
 
+QAction* _actionOpenFile;
+QAction* _actionCloseFile;
+QAction* _actionSaveAs;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     //_menu children
-    QAction* _actionOpenFile = ui->_menuFile->addAction("Open File");
-    QAction* _actionCloseFile = ui->_menuFile->addAction("Close File");
+    _actionOpenFile = ui->_menuFile->addAction("Open File");
+    _actionCloseFile = ui->_menuFile->addAction("Close File");
     ui->_menuFile->addSeparator();
-    QAction* _actionSaveAs = ui->_menuFile->addAction("Save As");
+    _actionSaveAs = ui->_menuFile->addAction("Save As");
+    _actionCloseFile->setEnabled(false);
+    _actionSaveAs->setEnabled(false);
     //slots
     connect(_actionOpenFile, SIGNAL(triggered()), this, SLOT(actionOpenFile()));
     connect(_actionCloseFile, SIGNAL(triggered()), this, SLOT(actionCloseFile()));
@@ -38,6 +44,8 @@ void MainWindow::setEnabled(bool value) {
     ui->_tabWidget->setEnabled(value);
     ui->_activeFilter->setEnabled(value);
     ui->_treeFilter->setEnabled(value);
+    _actionCloseFile->setEnabled(value);
+    _actionSaveAs->setEnabled(value);
     if(!value) ui->_applyFilterBtn->setEnabled(value);
 }
 
@@ -46,8 +54,10 @@ void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
     FileManager fileManager(this);
     DataManager *data = nullptr; // TODO
-    setEnabled(fileManager.openFile(data));
-    resetInterface();
+    if(fileManager.openFile(data)) {
+        setEnabled(true);
+        resetInterface();
+    }
 }
 
 void MainWindow::actionCloseFile() {
@@ -58,6 +68,10 @@ void MainWindow::actionCloseFile() {
 
 void MainWindow::actionSaveAs() {
     qDebug() << "[USER ACTION] Save As";
+    FileManager fileManager(this);
+    if(fileManager.saveFile("test", nullptr)) {
+        //TODO
+    }
 }
 
 void MainWindow::activateFilter() {

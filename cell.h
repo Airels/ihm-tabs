@@ -10,19 +10,19 @@ class Cell: public QStandardItem
 Q_OBJECT
 
 public:
-    Cell(QString text, QColor color);
-    Cell(QString text);
+    Cell(double value, QColor color);
+    Cell(double value);
     ~Cell();
 
-    QString getText();
-    void setText(QString text);
+    double getvalue();
+    void setValue(double value);
     QColor getColor();
     void setColor(QColor color);
     bool isUpdatable();
     // void setUpdatable(bool updatable);
 
 private:
-    QString text;
+    double value;
     QColor color;
     const bool updatable = false;
 };

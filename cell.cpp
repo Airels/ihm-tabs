@@ -1,12 +1,12 @@
 #include "cell.h"
 
-Cell::Cell(QString text, QColor color) {
-    this->text = text;
+Cell::Cell(double value, QColor color) {
+    this->value = value;
     this->color = color;
 }
 
-Cell::Cell(QString text) {
-    this->text = text;
+Cell::Cell(double value) {
+    this->value = value;
     this->color = QColor(255, 255, 255);
 }
 
@@ -14,12 +14,12 @@ Cell::~Cell() {
 
 }
 
-QString Cell::getText() {
-    return text;
+double Cell::getvalue() {
+    return value;
 }
 
-void Cell::setText(QString text) {
-    this->text = text;
+void Cell::setValue(double value) {
+    this->value = value;
 }
 
 QColor Cell::getColor() {

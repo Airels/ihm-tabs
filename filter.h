@@ -9,13 +9,11 @@ public:
     enum Type {
         MIN_MAX,
         FIXED,
-        CONDITION,
         SIMPLIFIED_CONDITION,
-        MACHIN,
-        BIDULE,
-        TRUC
+        MODULO
+
     };
-    const QString typeNames[6] = {"Min/Max", "Fixed", "Condition", "Machin", "Bidule", "Truc"};
+    const QString typeNames[4] = {"Gradient Color", "Fixed Color", "Conditional value", "Modulo"};
 
     // Filter();
     virtual void apply(Cell * cell) = 0;

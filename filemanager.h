@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <cstring>
 #include <QFile>
+#include <QWidget>
 #include "datamanager.h"
 
 class FileManager : public QObject
@@ -11,15 +12,19 @@ class FileManager : public QObject
 Q_OBJECT
 
 public:
-    const QString types[2] = {
+    const QString acceptedFileTypes[3] = {
         "CSV File (*.csv)",
-        "XLS File (*.xls)"
+        "XML File (*.xml)",
+        "All files (*.*)"
     };
-    FileManager();
+    FileManager(QWidget attachedWidget);
 
 protected slots:
     void openFile(DataManager &var);
     void saveFile(QString filename, DataManager cells);
+
+private:
+    QWidget attachedWidget;
 };
 
 #endif // FILEMANAGER_H

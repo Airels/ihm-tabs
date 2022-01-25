@@ -2,6 +2,7 @@
 #include "fixedcolorfilter.h"
 #include "minmaxfilter.h"
 #include "simplifiedconditionfilter.h"
+#include "modulofilter.h"
 #include <float.h>
 #include <QRandomGenerator>
 
@@ -46,6 +47,12 @@ void DataManager::apply_filter_min_max(QModelIndexList indexList, QColor minColo
 
 void DataManager::apply_filter_simplified_condition(QModelIndexList indexList, double value, QColor underColor, QColor equalColor, QColor aboveColor){
     Filter *filter = new SimplifiedConditionFilter(value,underColor,equalColor,aboveColor);
+    apply_filter(filter,indexList);
+    delete filter;
+}
+
+void DataManager::apply_filter_modulo(QModelIndexList indexList, int moduloValue, QColor color){
+    Filter *filter = new ModuloFilter(moduloValue,color);
     apply_filter(filter,indexList);
     delete filter;
 }

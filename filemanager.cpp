@@ -20,11 +20,8 @@ bool FileManager::openFile(DataManager *&dataManager) {
     QString defaultSelection = this->acceptedFileTypes[1];
     QString filename = fileDialog.getOpenFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), getAcceptedFileTypes(), &defaultSelection);
 
-    if (filename == "") {
-        delete dataManager;
-        dataManager = nullptr;
+    if (filename == "")
         return false;
-    }
 
     qDebug() << "File selected: " << filename;
 
@@ -33,8 +30,6 @@ bool FileManager::openFile(DataManager *&dataManager) {
 
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::critical(attachedWidget, "Failed to open " + filename, "File " + filename + " could not be opened.", QMessageBox::Ok);
-        delete dataManager;
-        dataManager = nullptr;
         return false;
     }
 
@@ -68,8 +63,6 @@ bool FileManager::openFile(DataManager *&dataManager) {
         }
 
         QMessageBox::warning(attachedWidget, "Wrong file format", msg, QMessageBox::Ok);
-        delete dataManager;
-        dataManager = nullptr;
         return false;
     }
 
@@ -77,8 +70,69 @@ bool FileManager::openFile(DataManager *&dataManager) {
     return true;
 }
 
-bool FileManager::saveFile(QString filename, DataManager *cells) {
-    exit(501);
+bool FileManager::saveFile(DataManager *dataManager) {
+    const QStandardItemModel *cells = dataManager->getCells();
+    QFileDialog fileDialog;
+    QString defaultSelection = this->acceptedFileTypes[1];
+    QString filename = fileDialog.getSaveFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), this->acceptedFileTypes[2], &defaultSelection);
+
+    if (filename == "")
+        return false;
+
+    qDebug() << filename;
+
+    QFile file(filename);
+
+    if (!file.open(QIODevice::WriteOnly)) {
+        QMessageBox::critical(attachedWidget, "Failed to open " + filename, "File " + filename + " could not be opened.", QMessageBox::Ok);
+        return false;
+    }
+
+    QTextStream fileIn(&file);
+    QDomDocument xmlFile;
+
+    QDomElement data = xmlFile.createElement("data");
+    xmlFile.appendChild(data);
+
+    int nbRows = cells->rowCount(), nbColumns = cells->columnCount();
+
+    for (int row = 0; row < nbRows; row++) {
+        QDomElement rowDom = xmlFile.createElement("row");
+        data.appendChild(rowDom);
+
+        for (int column = 0; column < nbColumns; column++) {
+            Cell *cell = (Cell *) cells->item(row, column);
+            QDomElement cellDom = xmlFile.createElement("cell");
+            rowDom.appendChild(cellDom);
+
+            QDomElement value = xmlFile.createElement("value");
+            cellDom.appendChild(value);
+            value.appendChild(xmlFile.createTextNode(QString::number(cell->getvalue())));
+
+            QDomElement colorDom = xmlFile.createElement("color");
+            cellDom.appendChild(colorDom);
+            int r, g, b;
+            cell->getColor().getRgb(&r, &g, &b);
+
+
+            QDomElement redDom = xmlFile.createElement("red");
+            colorDom.appendChild(redDom);
+            redDom.appendChild(xmlFile.createTextNode(QString::number(r)));
+
+            QDomElement greenDom = xmlFile.createElement("green");
+            colorDom.appendChild(greenDom);
+            greenDom.appendChild(xmlFile.createTextNode(QString::number(g)));
+
+            QDomElement blueDom = xmlFile.createElement("blue");
+            colorDom.appendChild(blueDom);
+            blueDom.appendChild(xmlFile.createTextNode(QString::number(b)));
+        }
+    }
+
+    fileIn << xmlFile.toString();
+    file.close();
+
+    return true;
 }
 
 QString FileManager::getAcceptedFileTypes() {
@@ -96,7 +150,7 @@ QString FileManager::getAcceptedFileTypes() {
 
 bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
     if (data == nullptr) {
-        qDebug() << "Cannot parse CSV File: model pointer is null" << endl;
+        qDebug() << "Cannot parse CSV File: model pointer is null";
         exit(EXIT_FAILURE);
     }
 
@@ -134,7 +188,7 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
 
 bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
     if (data == nullptr) {
-            qDebug() << "Cannot parse XML File: model pointer is null" << endl;
+            qDebug() << "Cannot parse XML File: model pointer is null";
             exit(EXIT_FAILURE);
     }
 

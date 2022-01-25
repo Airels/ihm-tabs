@@ -3,32 +3,40 @@
 #include "filemanager.h"
 #include <QDebug>
 
-QAction* _actionOpenFile;
-QAction* _actionCloseFile;
-QAction* _actionSaveAs;
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //instantiate attributes
+    dataManager = nullptr;
+    fileManager = new FileManager(this);
+    viewManager = new ViewManager(ui->_tableView);
     //_menu children
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
     ui->_menuFile->addSeparator();
-    _actionSaveAs = ui->_menuFile->addAction("Save As");
+    _actionSaveAs = ui->_menuFile->addAction("Save As...");
+    _actionExportAs = ui->_menuFile->addAction("Export Image As...");
     _actionCloseFile->setEnabled(false);
     _actionSaveAs->setEnabled(false);
+    _actionExportAs->setEnabled(false);
     //slots
     connect(_actionOpenFile, SIGNAL(triggered()), this, SLOT(actionOpenFile()));
     connect(_actionCloseFile, SIGNAL(triggered()), this, SLOT(actionCloseFile()));
     connect(_actionSaveAs, SIGNAL(triggered()), this, SLOT(actionSaveAs()));
+    connect(_actionExportAs, SIGNAL(triggered()), this, SLOT(actionExportAs()));
     connect(ui->_treeFilter,SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(activateFilter()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete fileManager;
+    delete dataManager;
+    delete viewManager;
 }
 
 void MainWindow::resetInterface() {
@@ -46,15 +54,18 @@ void MainWindow::setEnabled(bool value) {
     ui->_treeFilter->setEnabled(value);
     _actionCloseFile->setEnabled(value);
     _actionSaveAs->setEnabled(value);
+    _actionExportAs->setEnabled(value);
     if(!value) ui->_applyFilterBtn->setEnabled(value);
 }
 
 /* SLOTS */
 void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
-    FileManager fileManager(this);
-    DataManager *data = nullptr; // TODO
-    if(fileManager.openFile(data)) {
+    //FileManager fileManager(this);
+    if(fileManager->openFile(dataManager)) {
+        QStandardItemModel *model = dataManager->getCells();
+        viewManager->tableView()->setModel(model);
+        //viewManager->tableView()->update();
         setEnabled(true);
         resetInterface();
     }
@@ -72,6 +83,10 @@ void MainWindow::actionSaveAs() {
     if(fileManager.saveFile("test", nullptr)) {
         //TODO
     }
+}
+
+void MainWindow::actionExportAs() {
+    qDebug() << "[USER ACTION] Export Image As";
 }
 
 void MainWindow::activateFilter() {

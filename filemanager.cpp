@@ -89,6 +89,8 @@ QString FileManager::getAcceptedFileTypes() {
         res += str + token;
     }
 
+    res = res.left(res.length() - 2);
+
     return res;
 }
 

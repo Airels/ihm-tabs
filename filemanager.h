@@ -27,8 +27,8 @@ private:
     QWidget * attachedWidget;
 
     QString getAcceptedFileTypes();
-    void parseCSVFile(const QFile &file, QStandardItemModel * data);
-    void parseXMLFile(const QFile &file, QStandardItemModel * data);
+    void parseCSVFile(QFile &file, QStandardItemModel * data);
+    void parseXMLFile(QFile &file, QStandardItemModel * data);
 };
 
 #endif // FILEMANAGER_H

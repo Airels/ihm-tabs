@@ -17,14 +17,15 @@ public:
         "XML File (*.xml)",
         "All files (*.*)"
     };
-    FileManager(QWidget attachedWidget);
+    FileManager(QWidget * attachedWidget);
 
 protected slots:
     void openFile(DataManager &var);
     void saveFile(QString filename, DataManager cells);
 
 private:
-    QWidget attachedWidget;
+    QWidget * attachedWidget;
+    QString getAcceptedFileTypes();
 };
 
 #endif // FILEMANAGER_H

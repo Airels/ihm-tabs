@@ -63,8 +63,8 @@ void MainWindow::activateFilter() {
     int toolIndex = ui->_treeFilter->currentIndex().row();
     qDebug() << "[USER ACTION] 'activated new filer from category " << categoryIndex << " and tool index " << toolIndex;
     //TODO with the given values, connect to the filter tool and connect to the corresponding slot
-    //connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
     disconnect(ui->_applyFilterBtn, SIGNAL(clicked()));
+    //connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
     ui->_applyFilterBtn->setEnabled(true);
 }
 

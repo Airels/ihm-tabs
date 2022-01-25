@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1280</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,39 +25,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="_tableView">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="accessibleName">
-        <string/>
-       </property>
-       <attribute name="title">
-        <string>Table View</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="_pixelView">
-       <attribute name="title">
-        <string>Pixel View</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QFrame" name="frame">
+     <widget class="QSplitter" name="splitter">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -67,133 +35,211 @@
       <property name="minimumSize">
        <size>
         <width>20</width>
-        <height>0</height>
+        <height>20</height>
        </size>
       </property>
-      <property name="maximumSize">
-       <size>
-        <width>200</width>
-        <height>16777215</height>
-       </size>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <property name="lineWidth">
-       <number>10</number>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+      <widget class="QTabWidget" name="_tabWidget">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="_tableTab">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="accessibleName">
+         <string/>
+        </property>
+        <attribute name="title">
+         <string>Table Representation</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="leftMargin">
+          <number>0</number>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+         <property name="topMargin">
+          <number>0</number>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>22</height>
-          </size>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QTreeWidget" name="_treeFilter">
-         <column>
-          <property name="text">
-           <string>Filters</string>
-          </property>
-         </column>
-         <item>
-          <property name="text">
-           <string>Colorize</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Colorize Cell</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Colorize Column</string>
-           </property>
-          </item>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QTableView" name="_tableView"/>
          </item>
-         <item>
-          <property name="text">
-           <string>Other tools</string>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="_pixelTab">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="title">
+         <string>Pixel Represenation</string>
+        </attribute>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="_toolsWidget" native="true">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>22</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QTreeWidget" name="_treeFilter">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Filters</string>
+           </property>
+          </column>
           <item>
            <property name="text">
-            <string>test</string>
+            <string>Colorize</string>
            </property>
+           <item>
+            <property name="text">
+             <string>Colorize Cell</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Colorize Column</string>
+            </property>
+           </item>
           </item>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="_activeFilter">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>400</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>&lt;Filter Name&gt;</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="_filterApplyBtn">
-         <property name="text">
-          <string>Apply Filter</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+          <item>
+           <property name="text">
+            <string>Other tools</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>test</string>
+            </property>
+           </item>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="_activeFilter">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>400</height>
+           </size>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="_applyFilterBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Apply Filter</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="_menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1280</width>
      <height>25</height>
     </rect>
    </property>
    <property name="defaultUp">
     <bool>false</bool>
    </property>
-   <widget class="QMenu" name="menuFIle">
+   <widget class="QMenu" name="_menuFile">
     <property name="title">
      <string>File</string>
     </property>
-    <property name="separatorsCollapsible">
-     <bool>false</bool>
-    </property>
-    <property name="toolTipsVisible">
-     <bool>false</bool>
-    </property>
-    <addaction name="_actionOpenFile"/>
-    <addaction name="separator"/>
-    <addaction name="_actionSaveAs"/>
    </widget>
-   <addaction name="menuFIle"/>
+   <addaction name="_menuFile"/>
   </widget>
   <action name="actionOpen_File">
    <property name="text">
@@ -207,12 +253,27 @@
   </action>
   <action name="_actionOpenFile">
    <property name="text">
-    <string>Open FIle</string>
+    <string>Open File</string>
+   </property>
+  </action>
+  <action name="_actionCloseFile">
+   <property name="text">
+    <string>Close File</string>
+   </property>
+  </action>
+  <action name="actionClose_File">
+   <property name="text">
+    <string>Save As...</string>
    </property>
   </action>
   <action name="_actionSaveAs">
    <property name="text">
     <string>Save As...</string>
+   </property>
+  </action>
+  <action name="actionssss">
+   <property name="text">
+    <string>ssss</string>
    </property>
   </action>
  </widget>

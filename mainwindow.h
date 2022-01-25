@@ -17,5 +17,13 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setEnabled(bool);
+    void resetInterface();
+
+protected slots:
+    void actionOpenFile();
+    void actionCloseFile();
+    void actionSaveAs();
+    void applyFilter();
 };
 #endif // MAINWINDOW_H

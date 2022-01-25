@@ -3,6 +3,7 @@
 #include "minmaxfilter.h"
 #include "simplifiedconditionfilter.h"
 #include <float.h>
+#include <QRandomGenerator>
 
 DataManager::DataManager()
 {
@@ -58,6 +59,36 @@ void DataManager::apply_filter(Filter *filter, QModelIndexList indexList){
 
 QStandardItemModel * DataManager::getCells() {
     return this->cells;
+}
+
+void DataManager::generateRandomValue(int row, int column){
+    cells->clear();
+    QList<QStandardItem *> items;
+    for(int i=0;i<column;i++){
+        items.append(new Cell(0));
+    }
+
+    cells->setColumnCount(column);
+
+    for(int i=0;i<row;i++){
+        cells->appendRow(items);
+    }
+
+    for(int rowIndex = 0; rowIndex < row; rowIndex++){
+        for(int columnIndex = 0; columnIndex < column; columnIndex++){
+
+            Cell *cell = (Cell *)(cells->item(rowIndex,columnIndex));
+            QRandomGenerator generator;
+            double value = generator.generateDouble() * DBL_MAX;
+            double sign = generator.generateDouble();
+            if(sign < 0.5){
+                cell->setValue(-value);
+            }else{
+                cell->setValue(value);
+            }
+
+        }
+    }
 }
 
 // row = 1; column = -1;

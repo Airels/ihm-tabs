@@ -18,6 +18,7 @@ public:
     ~DataManager();
     void set(Cell *cell, int row, int column);
     QStandardItemModel * getCells();
+    void generateRandomValue(int row, int column);
 
 protected slots:
     void apply_filter_fixed_color(QModelIndexList indexList, QColor color);

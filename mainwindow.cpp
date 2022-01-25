@@ -24,29 +24,33 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::resetInterface() {
+    ui->_tabWidget->setCurrentIndex(0);
+    ui->_treeFilter->collapseAll();
+    ui->_activeFilter->setTitle("");
+    for(QObject *child : ui->_activeFilter->children()) {
+        child->deleteLater();
+    }
+}
+
 void MainWindow::setEnabled(bool value) {
     ui->_tabWidget->setEnabled(value);
     ui->_activeFilter->setEnabled(value);
     ui->_applyFilterBtn->setEnabled(value);
     ui->_treeFilter->setEnabled(value);
-    if(!value) {
-        ui->_tabWidget->setCurrentIndex(0);
-        ui->_treeFilter->collapseAll();
-        for(QObject *child : ui->_activeFilter->children()) {
-            child->deleteLater();
-        }
-    }
 }
 
 /* SLOTS */
 void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
     setEnabled(true);
+    resetInterface();
 }
 
 void MainWindow::actionCloseFile() {
     qDebug() << "[USER ACTION] Close File";
     setEnabled(false);
+    resetInterface();
 }
 
 void MainWindow::actionSaveAs() {

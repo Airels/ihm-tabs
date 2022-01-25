@@ -185,7 +185,7 @@
            </size>
           </property>
           <property name="title">
-           <string>&lt;Filter Name&gt;</string>
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

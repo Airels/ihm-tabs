@@ -17,10 +17,11 @@ public:
     QStandardItemModel * getCells();
 
 protected slots:
-    void apply_filter_fixed_color(int row, int column, QColor color);
-    void apply_filter_min_max(int row, int column, QColor gradientMin, QColor gradientMax);
+    void apply_filter_fixed_color(QModelIndexList indexList, QColor color);
+    void apply_filter_min_max(QModelIndexList indexList, QColor gradientMin, QColor gradientMax);
 
 private:
+    void apply_filter(Filter * filter, QModelIndexList indexList);
     QStandardItemModel *cells;
 };
 

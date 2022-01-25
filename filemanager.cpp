@@ -108,7 +108,7 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
         else if (line.contains(","))
             row = line.split(",");
         else {
-            QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while parsing CSV File (no presence of valid separators)", QMessageBox::Ok);
+            QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while reading CSV File (no presence of valid separators)", QMessageBox::Ok);
             return false;
         }
 
@@ -118,7 +118,7 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
             QStandardItem *cell = new Cell(value.toDouble(&ok));
 
             if (!ok) {
-                QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while parsing CSV File (data contains non-numerical values)", QMessageBox::Ok);
+                QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while reading CSV File (data contains non-numerical values)", QMessageBox::Ok);
                 return false;
             }
             cells.append(cell);
@@ -140,12 +140,13 @@ bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
     QDomDocument xmlFile;
     xmlFile.setContent(f);
 
-    QDomElement root = xmlFile.documentElement().firstChildElement();
+    QDomElement root = xmlFile.documentElement();
     QDomElement row = root.firstChildElement();
 
     while (!row.isNull()) {
         if (row.tagName() != "row") {
-            qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+            qDebug("Cannot read XML file: wrong xml encoding (row element not found)");
+            QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected row)", QMessageBox::Ok);
             return false;
         }
 
@@ -154,44 +155,50 @@ bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
 
         while (!cell.isNull()) {
             if (cell.tagName() != "cell") {
-                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                qDebug("Cannot read XML file: wrong xml encoding (cell element not found)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected cell)", QMessageBox::Ok);
                 return false;
             }
 
             bool ok(false);
-            double value = cell.elementsByTagName("value").at(0).toText().data().toDouble(&ok);
+            double value = cell.elementsByTagName("value").at(0).toElement().text().toDouble(&ok);
 
             if (!ok) {
                 qDebug("Cannot read XML file: data contains non-numerical values"); // TODO
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: data contains non-numerical values", QMessageBox::Ok);
                 return false;
             }
 
             QDomElement colors = cell.elementsByTagName("color").at(0).toElement();
             if (colors.isNull()) {
-                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                qDebug("Cannot read XML file: wrong xml encoding (color element not found)"); // TODO
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected cell)", QMessageBox::Ok);
                 return false;
             }
 
             int red, green, blue;
 
             ok = false;
-            red = colors.elementsByTagName("red").at(0).toElement().toText().data().toDouble(&ok);
+            red = colors.elementsByTagName("red").at(0).toElement().text().toDouble(&ok);
             if (!ok || red < 0 || red > 255) {
-                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                qDebug("Cannot read XML file: wrong xml encoding (red value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (red value)", QMessageBox::Ok);
                 return false;
             }
 
             ok = false;
-            green = colors.elementsByTagName("green").at(0).toElement().toText().data().toDouble(&ok);
-            if (!ok || red < 0 || red > 255) {
-                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+            green = colors.elementsByTagName("green").at(0).toElement().text().toDouble(&ok);
+            if (!ok || green < 0 || green > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding (green value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (green value)", QMessageBox::Ok);
                 return false;
             }
 
             ok = false;
-            blue = colors.elementsByTagName("blue").at(0).toElement().toText().data().toDouble(&ok);
-            if (!ok || red < 0 || red > 255) {
-                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+            blue = colors.elementsByTagName("blue").at(0).toElement().text().toDouble(&ok);
+            if (!ok || blue < 0 || blue > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding (blue value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (blue value)", QMessageBox::Ok);
                 return false;
             }
 

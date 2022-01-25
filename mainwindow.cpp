@@ -65,6 +65,7 @@ void MainWindow::activateFilter() {
     //TODO with the given values, connect to the filter tool and connect to the corresponding slot
     //connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
     disconnect(ui->_applyFilterBtn, SIGNAL(clicked()));
+    ui->_applyFilterBtn->setEnabled(true);
 }
 
 void MainWindow::applyFilter() {

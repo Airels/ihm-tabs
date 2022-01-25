@@ -10,6 +10,7 @@ public:
         MIN_MAX,
         FIXED,
         CONDITION,
+        SIMPLIFIED_CONDITION,
         MACHIN,
         BIDULE,
         TRUC

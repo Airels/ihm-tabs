@@ -11,7 +11,7 @@ FileManager::FileManager(QWidget * attachedWidget)
     this->attachedWidget = attachedWidget;
 }
 
-bool FileManager::openFile(DataManager *dataManager) {
+bool FileManager::openFile(DataManager *&dataManager) {
     if (dataManager == nullptr)
         dataManager = new DataManager();
 

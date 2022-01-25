@@ -20,15 +20,15 @@ public:
     FileManager(QWidget * attachedWidget);
 
 protected slots:
-    void openFile(DataManager &var);
+    void openFile(DataManager *dataManager);
     void saveFile(QString filename, DataManager cells);
 
 private:
     QWidget * attachedWidget;
 
     QString getAcceptedFileTypes();
-    void parseCSVFile(QFile &file, QStandardItemModel * data);
-    void parseXMLFile(QFile &file, QStandardItemModel * data);
+    bool parseCSVFile(QFile &file, QStandardItemModel * data);
+    bool parseXMLFile(QFile &file, QStandardItemModel * data);
 };
 
 #endif // FILEMANAGER_H

@@ -16,6 +16,8 @@ SOURCES += \
     fixedcolorfilter.cpp \
     main.cpp \
     mainwindow.cpp \
+    minmaxfilter.cpp \
+    simplifiedconditionfilter.cpp \
     tablewidget.cpp
 
 HEADERS += \
@@ -25,6 +27,8 @@ HEADERS += \
     filter.h \
     fixedcolorfilter.h \
     mainwindow.h \
+    minmaxfilter.h \
+    simplifiedconditionfilter.h \
     tablewidget.h
 
 FORMS += \

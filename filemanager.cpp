@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QTextStream>
+#include <QtXml>
 
 FileManager::FileManager(QWidget * attachedWidget)
 {
@@ -72,6 +73,7 @@ bool FileManager::openFile(DataManager *dataManager) {
         return false;
     }
 
+    file.close();
     return true;
 }
 
@@ -134,5 +136,74 @@ bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
             exit(EXIT_FAILURE);
     }
 
-    exit(501);
+    QFile *f = &file;
+    QDomDocument xmlFile;
+    xmlFile.setContent(f);
+
+    QDomElement root = xmlFile.documentElement().firstChildElement();
+    QDomElement row = root.firstChildElement();
+
+    while (!row.isNull()) {
+        if (row.tagName() != "row") {
+            qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+            return false;
+        }
+
+        QList<QStandardItem *> cells;
+        QDomElement cell = row.firstChildElement();
+
+        while (!cell.isNull()) {
+            if (cell.tagName() != "cell") {
+                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                return false;
+            }
+
+            bool ok(false);
+            double value = cell.elementsByTagName("value").at(0).toText().data().toDouble(&ok);
+
+            if (!ok) {
+                qDebug("Cannot read XML file: data contains non-numerical values"); // TODO
+                return false;
+            }
+
+            QDomElement colors = cell.elementsByTagName("color").at(0).toElement();
+            if (colors.isNull()) {
+                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                return false;
+            }
+
+            int red, green, blue;
+
+            ok = false;
+            red = colors.elementsByTagName("red").at(0).toElement().toText().data().toDouble(&ok);
+            if (!ok || red < 0 || red > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                return false;
+            }
+
+            ok = false;
+            green = colors.elementsByTagName("green").at(0).toElement().toText().data().toDouble(&ok);
+            if (!ok || red < 0 || red > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                return false;
+            }
+
+            ok = false;
+            blue = colors.elementsByTagName("blue").at(0).toElement().toText().data().toDouble(&ok);
+            if (!ok || red < 0 || red > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding"); // TODO
+                return false;
+            }
+
+            cells.append(new Cell(value, QColor(red, green, blue)));
+
+            cell = cell.nextSiblingElement();
+        }
+
+        data->appendRow(cells);
+
+        row = row.nextSiblingElement();
+    }
+
+    return true;
 }

@@ -11,7 +11,7 @@ FileManager::FileManager(QWidget * attachedWidget)
     this->attachedWidget = attachedWidget;
 }
 
-void FileManager::openFile(DataManager *dataManager) {
+bool FileManager::openFile(DataManager *dataManager) {
     if (dataManager == nullptr)
         dataManager = new DataManager();
 
@@ -19,35 +19,63 @@ void FileManager::openFile(DataManager *dataManager) {
     QString defaultSelection = this->acceptedFileTypes[1];
     QString filename = fileDialog.getOpenFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), getAcceptedFileTypes(), &defaultSelection);
 
-    QMessageBox::information(attachedWidget, "File selected", filename, QMessageBox::Ok);
+    if (filename == "") {
+        delete dataManager;
+        dataManager = nullptr;
+        return false;
+    }
+
+    qDebug() << "File selected: " << filename;
 
     QFile file(filename);
     QStandardItemModel *data = dataManager->getCells();
 
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::critical(attachedWidget, "Failed to open " + filename, "File " + filename + " could not be opened.", QMessageBox::Ok);
-        return;
+        delete dataManager;
+        dataManager = nullptr;
+        return false;
     }
 
-    if (filename.endsWith(".csv") || filename.endsWith(".CSV")) {
-        if (!this->parseCSVFile(file, data))
-            data->clear();
-    } else if (filename.endsWith(".xml") || filename.endsWith(".XML")) {
-        if (!this->parseXMLFile(file, data))
-            data->clear();
-    } else {
-        QString msg = "We are unable to read " + filename + " file, due to its wrong file type.\n";
-        msg +=  "Accepted file types :\n";
+    qDebug() << "File opened";
 
-        for (unsigned long long i = 1; i < sizeof acceptedFileTypes; i++) {
-            msg += acceptedFileTypes[i] + "\n";
+    if (filename.endsWith(".csv") || filename.endsWith(".CSV")) {
+        qDebug() << "CSV File";
+        if (!this->parseCSVFile(file, data)) {
+            data->clear();
+            return false;
+        }
+    } else if (filename.endsWith(".xml") || filename.endsWith(".XML")) {
+        qDebug() << "XML File";
+        if (!this->parseXMLFile(file, data)) {
+            data->clear();
+            return false;
+        }
+    } else {
+        qDebug() << "Not a recognized format";
+        QString msg = "We are unable to read '";
+        msg.append(filename);
+        msg.append("' file, due to its wrong file type.\n\n");
+        msg.append("Accepted file types :\n");
+
+        size_t size = sizeof acceptedFileTypes / sizeof(QString);
+        for (size_t i = 1; i < size; i++) {
+            qDebug() << i;
+            msg.append("\t- ");
+            msg.append(acceptedFileTypes[i]);
+            msg.append("\n");
         }
 
         QMessageBox::warning(attachedWidget, "Wrong file format", msg, QMessageBox::Ok);
+        delete dataManager;
+        dataManager = nullptr;
+        return false;
     }
+
+    return true;
 }
 
-void FileManager::saveFile(QString filename, DataManager *cells) {
+bool FileManager::saveFile(QString filename, DataManager *cells) {
     exit(501);
 }
 
@@ -67,8 +95,6 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
         qDebug() << "Cannot parse CSV File: model pointer is null" << endl;
         exit(EXIT_FAILURE);
     }
-
-    QMessageBox::information(attachedWidget, "File selected", "CSV FILE", QMessageBox::Ok);
 
     QTextStream in(&file);
     QString line;
@@ -107,8 +133,6 @@ bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
             qDebug() << "Cannot parse XML File: model pointer is null" << endl;
             exit(EXIT_FAILURE);
     }
-
-    QMessageBox::information(attachedWidget, "File selected", "XML FILE", QMessageBox::Ok);
 
     exit(501);
 }

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "filemanager.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -43,7 +44,9 @@ void MainWindow::setEnabled(bool value) {
 /* SLOTS */
 void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
-    setEnabled(true);
+    FileManager fileManager(this);
+    DataManager *data = nullptr; // TODO
+    setEnabled(fileManager.openFile(data));
     resetInterface();
 }
 

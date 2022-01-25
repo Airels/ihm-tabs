@@ -49,7 +49,6 @@ void DataManager::apply_filter_simplified_condition(QModelIndexList indexList, d
     delete filter;
 }
 
-
 void DataManager::apply_filter(Filter *filter, QModelIndexList indexList){
 
     for (const QModelIndex &index : indexList){

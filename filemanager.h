@@ -8,11 +8,8 @@
 #include <QWidget>
 #include "datamanager.h"
 
-class FileManager : public QObject
+class FileManager
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(FileManager)
-
 public:
     const QString acceptedFileTypes[3] = {
         "All files (*.*)",
@@ -20,10 +17,8 @@ public:
         "XML File (*.xml)"
     };
     FileManager(QWidget * attachedWidget);
-
-protected slots:
-    void openFile(DataManager *dataManager);
-    void saveFile(QString filename, DataManager *cells);
+    bool openFile(DataManager *dataManager);
+    bool saveFile(QString filename, DataManager *cells);
 
 private:
     QWidget * attachedWidget;

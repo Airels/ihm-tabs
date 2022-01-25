@@ -9,8 +9,9 @@ class ViewManager : public QObject
 {
 Q_OBJECT
 public:
-    ViewManager(QAbstractItemModel &model);
-    ViewManager(QAbstractItemModel &model, QItemSelectionModel &selectionModel);
+    ViewManager(QTableView *tableView);
+    ViewManager(QTableView *tableView, QAbstractItemModel *model);
+    ViewManager(QTableView *tableView, QAbstractItemModel *model, QItemSelectionModel *selectionModel);
     QTableView *tableView();
 
 private:

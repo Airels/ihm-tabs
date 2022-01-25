@@ -1,32 +1,55 @@
 #include "datamanager.h"
 #include "fixedcolorfilter.h"
+#include "minmaxfilter.h"
+#include "simplifiedconditionfilter.h"
+#include <float.h>
 
 DataManager::DataManager()
 {
 
 }
 
-void DataManager::apply_filter_fixed_color(int row, int col, QColor color) {
-    FixedColorFilter filter = FixedColorFilter(color);
+void DataManager::apply_filter_fixed_color(QModelIndexList indexList, QColor color) {
+    Filter *filter = new FixedColorFilter(color);
+    apply_filter(filter, indexList);
+    delete filter;
+}
 
-    int row_max = 0, col_max = 0; // TODO
+void DataManager::apply_filter_min_max(QModelIndexList indexList, QColor minColor, QColor maxColor){
+    double minValue = DBL_MAX;
+    double maxValue = DBL_MIN;
+    double currentValue;
 
-    if (row == -1 && col == -1) {
-        for (int x = 0; x < row_max; x++) {
-            for (int y = 0; y < col_max; y++) {
-                filter.apply((Cell *) cells->item(x, y));
-            }
+    for (const QModelIndex &index : indexList){
+
+        Cell *cell = (Cell *)(cells->item(index.row(),index.column()));
+        currentValue = cell->getvalue();
+
+        if(currentValue > maxValue){
+            maxValue = currentValue;
         }
-    } else if (row == -1) {
-        for (int x = 0; x < row_max; x++) {
-            filter.apply((Cell *) cells->item(x, col));
+
+        if(currentValue < minValue){
+            minValue = currentValue;
         }
-    } else if (col == -1) {
-        for (int y = 0; y < col_max; y++) {
-            filter.apply((Cell *) cells->item(row, y));
-        }
-    } else {
-        filter.apply((Cell *) cells->item(row, col));
+
+    }
+    Filter *filter = new MinMaxFilter(minColor,maxColor,minValue,maxValue);
+    apply_filter(filter,indexList);
+    delete filter;
+}
+
+void DataManager::apply_filter_simplified_condition(QModelIndexList indexList, double value, QColor underColor, QColor equalColor, QColor aboveColor){
+    Filter *filter = new SimplifiedConditionFilter(value,underColor,equalColor,aboveColor);
+    apply_filter(filter,indexList);
+    delete filter;
+}
+
+
+void DataManager::apply_filter(Filter *filter, QModelIndexList indexList){
+
+    for (const QModelIndex &index : indexList){
+        filter->apply((Cell *) cells->item(index.row(), index.column()));
     }
 }
 

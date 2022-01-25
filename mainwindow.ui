@@ -150,6 +150,9 @@
            <property name="text">
             <string>Colorize</string>
            </property>
+           <property name="flags">
+            <set>ItemIsEnabled</set>
+           </property>
            <item>
             <property name="text">
              <string>Colorize Cell</string>
@@ -164,6 +167,9 @@
           <item>
            <property name="text">
             <string>Other tools</string>
+           </property>
+           <property name="flags">
+            <set>ItemIsEnabled</set>
            </property>
            <item>
             <property name="text">
@@ -278,5 +284,22 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_treeFilter</sender>
+   <signal>itemClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1189</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>-18</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

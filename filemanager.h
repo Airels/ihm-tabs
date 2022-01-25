@@ -13,9 +13,9 @@ Q_OBJECT
 
 public:
     const QString acceptedFileTypes[3] = {
+        "All files (*.*)",
         "CSV File (*.csv)",
-        "XML File (*.xml)",
-        "All files (*.*)"
+        "XML File (*.xml)"
     };
     FileManager(QWidget * attachedWidget);
 
@@ -25,7 +25,10 @@ protected slots:
 
 private:
     QWidget * attachedWidget;
+
     QString getAcceptedFileTypes();
+    void parseCSVFile(const QFile &file, QStandardItemModel * data);
+    void parseXMLFile(const QFile &file, QStandardItemModel * data);
 };
 
 #endif // FILEMANAGER_H

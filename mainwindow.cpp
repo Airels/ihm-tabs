@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(_actionOpenFile, SIGNAL(triggered()), this, SLOT(actionOpenFile()));
     connect(_actionCloseFile, SIGNAL(triggered()), this, SLOT(actionCloseFile()));
     connect(_actionSaveAs, SIGNAL(triggered()), this, SLOT(actionSaveAs()));
-    connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
+    connect(ui->_treeFilter,SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(activateFilter()));
 }
 
 MainWindow::~MainWindow()
@@ -36,8 +36,8 @@ void MainWindow::resetInterface() {
 void MainWindow::setEnabled(bool value) {
     ui->_tabWidget->setEnabled(value);
     ui->_activeFilter->setEnabled(value);
-    ui->_applyFilterBtn->setEnabled(value);
     ui->_treeFilter->setEnabled(value);
+    if(!value) ui->_applyFilterBtn->setEnabled(value);
 }
 
 /* SLOTS */
@@ -55,6 +55,15 @@ void MainWindow::actionCloseFile() {
 
 void MainWindow::actionSaveAs() {
     qDebug() << "[USER ACTION] Save As";
+}
+
+void MainWindow::activateFilter() {
+    if(ui->_treeFilter->currentItem()->childCount() > 0) return;
+    int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
+    int toolIndex = ui->_treeFilter->currentIndex().row();
+    qDebug() << "[USER ACTION] 'activated new filer from category " << categoryIndex << " and tool index " << toolIndex;
+    //TODO with the given values, connect to the filter tool and connect to the corresponding slot
+    //connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
 }
 
 void MainWindow::applyFilter() {

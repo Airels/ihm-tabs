@@ -24,6 +24,7 @@ protected slots:
     void actionOpenFile();
     void actionCloseFile();
     void actionSaveAs();
+    void activateFilter();
     void applyFilter();
 };
 #endif // MAINWINDOW_H

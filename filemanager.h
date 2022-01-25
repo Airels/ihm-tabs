@@ -17,7 +17,7 @@ public:
         "XML File (*.xml)"
     };
     FileManager(QWidget * attachedWidget);
-    bool openFile(DataManager *dataManager);
+    bool openFile(DataManager *&dataManager);
     bool saveFile(QString filename, DataManager *cells);
 
 private:

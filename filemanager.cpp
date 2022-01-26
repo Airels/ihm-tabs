@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QTextStream>
+#include <QtXml>
 
 FileManager::FileManager(QWidget * attachedWidget)
 {
@@ -19,11 +20,8 @@ bool FileManager::openFile(DataManager *&dataManager) {
     QString defaultSelection = this->acceptedFileTypes[1];
     QString filename = fileDialog.getOpenFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), getAcceptedFileTypes(), &defaultSelection);
 
-    if (filename == "") {
-        delete dataManager;
-        dataManager = nullptr;
+    if (filename == "")
         return false;
-    }
 
     qDebug() << "File selected: " << filename;
 
@@ -32,8 +30,6 @@ bool FileManager::openFile(DataManager *&dataManager) {
 
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::critical(attachedWidget, "Failed to open " + filename, "File " + filename + " could not be opened.", QMessageBox::Ok);
-        delete dataManager;
-        dataManager = nullptr;
         return false;
     }
 
@@ -67,16 +63,76 @@ bool FileManager::openFile(DataManager *&dataManager) {
         }
 
         QMessageBox::warning(attachedWidget, "Wrong file format", msg, QMessageBox::Ok);
-        delete dataManager;
-        dataManager = nullptr;
         return false;
     }
 
+    file.close();
     return true;
 }
 
-bool FileManager::saveFile(QString filename, DataManager *cells) {
-    exit(501);
+bool FileManager::saveFile(DataManager *dataManager) {
+    const QStandardItemModel *cells = dataManager->getCells();
+    QFileDialog fileDialog;
+    QString defaultSelection = this->acceptedFileTypes[1];
+    QString filename = fileDialog.getSaveFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), this->acceptedFileTypes[2], &defaultSelection);
+
+    if (filename == "")
+        return false;
+
+    qDebug() << filename;
+
+    QFile file(filename);
+
+    if (!file.open(QIODevice::WriteOnly)) {
+        QMessageBox::critical(attachedWidget, "Failed to open " + filename, "File " + filename + " could not be opened.", QMessageBox::Ok);
+        return false;
+    }
+
+    QTextStream fileIn(&file);
+    QDomDocument xmlFile;
+
+    QDomElement data = xmlFile.createElement("data");
+    xmlFile.appendChild(data);
+
+    int nbRows = cells->rowCount(), nbColumns = cells->columnCount();
+
+    for (int row = 0; row < nbRows; row++) {
+        QDomElement rowDom = xmlFile.createElement("row");
+        data.appendChild(rowDom);
+
+        for (int column = 0; column < nbColumns; column++) {
+            Cell *cell = (Cell *) cells->item(row, column);
+            QDomElement cellDom = xmlFile.createElement("cell");
+            rowDom.appendChild(cellDom);
+
+            QDomElement value = xmlFile.createElement("value");
+            cellDom.appendChild(value);
+            value.appendChild(xmlFile.createTextNode(QString::number(cell->getvalue())));
+
+            QDomElement colorDom = xmlFile.createElement("color");
+            cellDom.appendChild(colorDom);
+            int r, g, b;
+            cell->getColor().getRgb(&r, &g, &b);
+
+
+            QDomElement redDom = xmlFile.createElement("red");
+            colorDom.appendChild(redDom);
+            redDom.appendChild(xmlFile.createTextNode(QString::number(r)));
+
+            QDomElement greenDom = xmlFile.createElement("green");
+            colorDom.appendChild(greenDom);
+            greenDom.appendChild(xmlFile.createTextNode(QString::number(g)));
+
+            QDomElement blueDom = xmlFile.createElement("blue");
+            colorDom.appendChild(blueDom);
+            blueDom.appendChild(xmlFile.createTextNode(QString::number(b)));
+        }
+    }
+
+    fileIn << xmlFile.toString();
+    file.close();
+
+    return true;
 }
 
 QString FileManager::getAcceptedFileTypes() {
@@ -87,12 +143,14 @@ QString FileManager::getAcceptedFileTypes() {
         res += str + token;
     }
 
+    res = res.left(res.length() - 2);
+
     return res;
 }
 
 bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
     if (data == nullptr) {
-        qDebug() << "Cannot parse CSV File: model pointer is null" << endl;
+        qDebug() << "Cannot parse CSV File: model pointer is null";
         exit(EXIT_FAILURE);
     }
 
@@ -106,7 +164,7 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
         else if (line.contains(","))
             row = line.split(",");
         else {
-            QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while parsing CSV File (no presence of valid separators)", QMessageBox::Ok);
+            QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while reading CSV File (no presence of valid separators)", QMessageBox::Ok);
             return false;
         }
 
@@ -116,7 +174,7 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
             QStandardItem *cell = new Cell(value.toDouble(&ok));
 
             if (!ok) {
-                QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while parsing CSV File (data contains non-numerical values)", QMessageBox::Ok);
+                QMessageBox::critical(attachedWidget, "CSV Parsing Error", "Error while reading CSV File (data contains non-numerical values)", QMessageBox::Ok);
                 return false;
             }
             cells.append(cell);
@@ -130,9 +188,85 @@ bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {
 
 bool FileManager::parseXMLFile(QFile &file, QStandardItemModel * data) {
     if (data == nullptr) {
-            qDebug() << "Cannot parse XML File: model pointer is null" << endl;
+            qDebug() << "Cannot parse XML File: model pointer is null";
             exit(EXIT_FAILURE);
     }
 
-    exit(501);
+    QFile *f = &file;
+    QDomDocument xmlFile;
+    xmlFile.setContent(f);
+
+    QDomElement root = xmlFile.documentElement();
+    QDomElement row = root.firstChildElement();
+
+    while (!row.isNull()) {
+        if (row.tagName() != "row") {
+            qDebug("Cannot read XML file: wrong xml encoding (row element not found)");
+            QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected row)", QMessageBox::Ok);
+            return false;
+        }
+
+        QList<QStandardItem *> cells;
+        QDomElement cell = row.firstChildElement();
+
+        while (!cell.isNull()) {
+            if (cell.tagName() != "cell") {
+                qDebug("Cannot read XML file: wrong xml encoding (cell element not found)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected cell)", QMessageBox::Ok);
+                return false;
+            }
+
+            bool ok(false);
+            double value = cell.elementsByTagName("value").at(0).toElement().text().toDouble(&ok);
+
+            if (!ok) {
+                qDebug("Cannot read XML file: data contains non-numerical values"); // TODO
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: data contains non-numerical values", QMessageBox::Ok);
+                return false;
+            }
+
+            QDomElement colors = cell.elementsByTagName("color").at(0).toElement();
+            if (colors.isNull()) {
+                qDebug("Cannot read XML file: wrong xml encoding (color element not found)"); // TODO
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: required data is missing (expected cell)", QMessageBox::Ok);
+                return false;
+            }
+
+            int red, green, blue;
+
+            ok = false;
+            red = colors.elementsByTagName("red").at(0).toElement().text().toDouble(&ok);
+            if (!ok || red < 0 || red > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding (red value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (red value)", QMessageBox::Ok);
+                return false;
+            }
+
+            ok = false;
+            green = colors.elementsByTagName("green").at(0).toElement().text().toDouble(&ok);
+            if (!ok || green < 0 || green > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding (green value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (green value)", QMessageBox::Ok);
+                return false;
+            }
+
+            ok = false;
+            blue = colors.elementsByTagName("blue").at(0).toElement().text().toDouble(&ok);
+            if (!ok || blue < 0 || blue > 255) {
+                qDebug("Cannot read XML file: wrong xml encoding (blue value)");
+                QMessageBox::critical(attachedWidget, "XML Parsing Error", "Error while reading XML file: cannot resolve cell color (blue value)", QMessageBox::Ok);
+                return false;
+            }
+
+            cells.append(new Cell(value, QColor(red, green, blue)));
+
+            cell = cell.nextSiblingElement();
+        }
+
+        data->appendRow(cells);
+
+        row = row.nextSiblingElement();
+    }
+
+    return true;
 }

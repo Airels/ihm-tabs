@@ -18,7 +18,7 @@ public:
     };
     FileManager(QWidget * attachedWidget);
     bool openFile(DataManager *&dataManager);
-    bool saveFile(QString filename, DataManager *cells);
+    bool saveFile(DataManager *dataManager);
 
 private:
     QWidget * attachedWidget;

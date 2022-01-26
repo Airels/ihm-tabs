@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>IHM TABS</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -191,7 +191,7 @@
           </item>
           <item>
            <property name="text">
-            <string>Misc.</string>
+            <string>Miscellaneous</string>
            </property>
            <property name="flags">
             <set>ItemIsEnabled</set>

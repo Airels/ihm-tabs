@@ -81,7 +81,32 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="QTableView" name="_tableView"/>
+          <widget class="QTableView" name="_tableView">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="midLineWidth">
+            <number>1</number>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="gridStyle">
+            <enum>Qt::SolidLine</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="cornerButtonEnabled">
+            <bool>false</bool>
+           </property>
+           <attribute name="horizontalHeaderCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+            <bool>false</bool>
+           </attribute>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -155,25 +180,30 @@
            </property>
            <item>
             <property name="text">
-             <string>Colorize Cell</string>
+             <string>Gradient Color</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Colorize Column</string>
+             <string>Fixed Color</string>
             </property>
            </item>
           </item>
           <item>
            <property name="text">
-            <string>Other tools</string>
+            <string>Misc.</string>
            </property>
            <property name="flags">
             <set>ItemIsEnabled</set>
            </property>
            <item>
             <property name="text">
-             <string>test</string>
+             <string>Conditional Value</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Modulo</string>
             </property>
            </item>
           </item>
@@ -245,7 +275,13 @@
      <string>File</string>
     </property>
    </widget>
+   <widget class="QMenu" name="_menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+   </widget>
    <addaction name="_menuFile"/>
+   <addaction name="_menuTools"/>
   </widget>
   <action name="actionOpen_File">
    <property name="text">

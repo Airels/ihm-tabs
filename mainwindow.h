@@ -20,23 +20,28 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void setEnabled(bool);
-    void resetInterface();
     ViewManager *viewManager;
     DataManager *dataManager;
     FileManager *fileManager;
-
-
     QAction* _actionOpenFile;
     QAction* _actionCloseFile;
     QAction* _actionSaveAs;
     QAction* _actionExportAs;
+    QAction* _actionGenerate;
+
+    void initAttributes();
+    void initSignals();
+    void setEnabled(bool);
+    void resetInterface();
+
 
 protected slots:
     void actionOpenFile();
     void actionCloseFile();
     void actionSaveAs();
     void actionExportAs();
+    void actionGenerate();
+
     void activateFilter();
     void applyFilter();
 };

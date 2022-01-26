@@ -3,12 +3,14 @@
 #include "filemanager.h"
 #include <QDebug>
 #include <QObject>
+#include <QIcon>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/icon.png"));
     initAttributes();
     initSignals();
 }

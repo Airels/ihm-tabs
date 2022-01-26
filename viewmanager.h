@@ -5,12 +5,13 @@
 #include <QTableView>
 #include <QAbstractItemModel>
 
-class TableViewManager : public QObject
+class ViewManager : public QObject
 {
 Q_OBJECT
 public:
-    TableViewManager(QAbstractItemModel &model);
-    TableViewManager(QAbstractItemModel &model, QItemSelectionModel &selectionModel);
+    ViewManager(QTableView *tableView);
+    ViewManager(QTableView *tableView, QAbstractItemModel *model);
+    ViewManager(QTableView *tableView, QAbstractItemModel *model, QItemSelectionModel *selectionModel);
     QTableView *tableView();
 
 private:

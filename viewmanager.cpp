@@ -1,17 +1,27 @@
 #include "viewmanager.h"
 
-TableViewManager::TableViewManager(QAbstractItemModel &model)
+ViewManager::ViewManager(QTableView *tableView){
+     myTableView = tableView;
+     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+     myTableView->update();
+}
+
+ViewManager::ViewManager(QTableView *tableView, QAbstractItemModel *model)
 {
-    myTableView->setModel(&model);
+    myTableView = tableView;
+    myTableView->setModel(model);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    myTableView->update();
 }
 
-TableViewManager::TableViewManager(QAbstractItemModel &model, QItemSelectionModel &selectionModel)
+ViewManager::ViewManager(QTableView *tableView, QAbstractItemModel *model, QItemSelectionModel *selectionModel)
 {
-    myTableView->setModel(&model);
-    myTableView->setSelectionModel(&selectionModel);
+    myTableView = tableView;
+    myTableView->setModel(model);
+    myTableView->setSelectionModel(selectionModel);
+    myTableView->update();
 }
 
-QTableView *TableViewManager::tableView(){
+QTableView *ViewManager::tableView(){
     return myTableView;
 }

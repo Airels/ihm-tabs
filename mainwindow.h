@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "viewmanager.h"
+#include "datamanager.h"
+#include "filemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,11 +22,21 @@ private:
     Ui::MainWindow *ui;
     void setEnabled(bool);
     void resetInterface();
+    ViewManager *viewManager;
+    DataManager *dataManager;
+    FileManager *fileManager;
+
+
+    QAction* _actionOpenFile;
+    QAction* _actionCloseFile;
+    QAction* _actionSaveAs;
+    QAction* _actionExportAs;
 
 protected slots:
     void actionOpenFile();
     void actionCloseFile();
     void actionSaveAs();
+    void actionExportAs();
     void activateFilter();
     void applyFilter();
 };

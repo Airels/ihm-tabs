@@ -6,7 +6,11 @@
 
 DataManager::DataManager()
 {
+    cells = new QStandardItemModel();
+}
 
+DataManager::~DataManager() {
+    delete cells;
 }
 
 void DataManager::apply_filter_fixed_color(QModelIndexList indexList, QColor color) {
@@ -45,12 +49,15 @@ void DataManager::apply_filter_simplified_condition(QModelIndexList indexList, d
     delete filter;
 }
 
-
 void DataManager::apply_filter(Filter *filter, QModelIndexList indexList){
 
     for (const QModelIndex &index : indexList){
         filter->apply((Cell *) cells->item(index.row(), index.column()));
     }
+}
+
+QStandardItemModel * DataManager::getCells() {
+    return this->cells;
 }
 
 // row = 1; column = -1;

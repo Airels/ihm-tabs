@@ -1,25 +1,31 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <QObject>
 #include <QApplication>
 #include <cstring>
 #include <QFile>
+#include <QWidget>
 #include "datamanager.h"
 
-class FileManager : public QObject
+class FileManager
 {
-Q_OBJECT
-
 public:
-    const QString types[2] = {
+    const QString acceptedFileTypes[3] = {
+        "All files (*.*)",
         "CSV File (*.csv)",
-        "XLS File (*.xls)"
+        "XML File (*.xml)"
     };
-    FileManager();
+    FileManager(QWidget * attachedWidget);
+    bool openFile(DataManager *&dataManager);
+    bool saveFile(QString filename, DataManager *cells);
 
-protected slots:
-    void openFile(DataManager &var);
-    void saveFile(QString filename, DataManager cells);
+private:
+    QWidget * attachedWidget;
+
+    QString getAcceptedFileTypes();
+    bool parseCSVFile(QFile &file, QStandardItemModel * data);
+    bool parseXMLFile(QFile &file, QStandardItemModel * data);
 };
 
 #endif // FILEMANAGER_H

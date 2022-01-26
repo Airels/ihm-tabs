@@ -18,7 +18,8 @@ SOURCES += \
     mainwindow.cpp \
     minmaxfilter.cpp \
     simplifiedconditionfilter.cpp \
-    tablewidget.cpp
+    tablewidget.cpp \
+    viewmanager.cpp
 
 HEADERS += \
     cell.h \
@@ -29,11 +30,15 @@ HEADERS += \
     mainwindow.h \
     minmaxfilter.h \
     simplifiedconditionfilter.h \
-    tablewidget.h
+    tablewidget.h \
+    viewmanager.h
 
 FORMS += \
     mainwindow.ui \
     tablewidget.ui
+
+RESOURCES += resources.qrc
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

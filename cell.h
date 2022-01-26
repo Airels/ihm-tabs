@@ -7,7 +7,6 @@
 
 class Cell: public QStandardItem
 {
-Q_OBJECT
 
 public:
     Cell(double value, QColor color);

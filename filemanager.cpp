@@ -35,13 +35,13 @@ bool FileManager::openFile(DataManager *&dataManager) {
 
     qDebug() << "File opened";
 
-    if (filename.endsWith(".csv") || filename.endsWith(".CSV")) {
+    if (filename.toLower().endsWith(".csv")) {
         qDebug() << "CSV File";
         if (!this->parseCSVFile(file, data)) {
             data->clear();
             return false;
         }
-    } else if (filename.endsWith(".xml") || filename.endsWith(".XML")) {
+    } else if (filename.toLower().endsWith(".itabs")) {
         qDebug() << "XML File";
         if (!this->parseXMLFile(file, data)) {
             data->clear();

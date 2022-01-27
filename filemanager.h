@@ -14,7 +14,7 @@ public:
     const QString acceptedFileTypes[3] = {
         "All files (*.*)",
         "CSV File (*.csv)",
-        "XML File (*.xml)"
+        "ITabs File (*.itabs)"
     };
     FileManager(QWidget * attachedWidget);
     bool openFile(DataManager *&dataManager);

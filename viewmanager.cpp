@@ -41,3 +41,4 @@ void ViewManager::updateSelection(const QItemSelection &selected){
 QTableView *ViewManager::tableView(){
     return myTableView;
 }
+

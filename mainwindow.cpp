@@ -86,6 +86,10 @@ void MainWindow::actionOpenFile() {
         resetInterface();
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
+<<<<<<< .merge_file_RO3TGs
+=======
+        //viewManager->tableView()->setModel(model);
+>>>>>>> .merge_file_W6qn2v
         ui->_tableView->setModel(viewManager->tableView()->model());
     }
 }

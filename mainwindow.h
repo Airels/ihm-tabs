@@ -5,6 +5,7 @@
 #include "viewmanager.h"
 #include "datamanager.h"
 #include "filemanager.h"
+#include "activatefiltermanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +24,7 @@ private:
     ViewManager *viewManager;
     DataManager *dataManager;
     FileManager *fileManager;
+    ActivateFilterManager *activateFilterManager;
     QAction* _actionOpenFile;
     QAction* _actionCloseFile;
     QAction* _actionSaveAs;

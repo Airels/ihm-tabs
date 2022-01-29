@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "filemanager.h"
+#include "activatefiltermanager.h"
 #include <QDebug>
 #include <QObject>
 #include <QIcon>
+#include <QCheckBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,12 +23,14 @@ MainWindow::~MainWindow()
     delete fileManager;
     delete dataManager;
     delete viewManager;
+    delete activateFilterManager;
 }
 
 void MainWindow::initAttributes() {
     dataManager = nullptr;
     fileManager = new FileManager(this);
     viewManager = new ViewManager(ui->_tableView);
+    activateFilterManager = new ActivateFilterManager(ui->_activeFilter, ui->_applyFilterBtn);
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
@@ -113,10 +117,10 @@ void MainWindow::activateFilter() {
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     qDebug() << "[USER ACTION] 'activated new filer from category " << categoryIndex << " and tool index " << toolIndex;
-    //TODO with the given values, connect to the filter tool and connect to the corresponding slot
-    disconnect(ui->_applyFilterBtn, SIGNAL(clicked()));
-    //connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
-    ui->_applyFilterBtn->setEnabled(true);
+    activateFilterManager->setFilterName(ui->_treeFilter->currentItem()->text(0));
+    activateFilterManager->handle(categoryIndex, toolIndex);
+    //test
+    QVBoxLayout* _activeFilterLayout = new QVBoxLayout;
 }
 
 void MainWindow::applyFilter() {

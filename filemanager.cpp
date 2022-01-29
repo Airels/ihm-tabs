@@ -17,8 +17,8 @@ bool FileManager::openFile(DataManager *&dataManager) {
         dataManager = new DataManager();
 
     QFileDialog fileDialog;
-    QString defaultSelection = this->acceptedFileTypes[1];
-    QString filename = fileDialog.getOpenFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), getAcceptedFileTypes(), &defaultSelection);
+    QString defaultSelection = this->acceptedOpenFileTypes;
+    QString filename = fileDialog.getOpenFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), this->acceptedOpenFileTypes, &defaultSelection);
 
     if (filename == "")
         return false;
@@ -42,7 +42,7 @@ bool FileManager::openFile(DataManager *&dataManager) {
             return false;
         }
     } else if (filename.toLower().endsWith(".itabs")) {
-        qDebug() << "XML File";
+        qDebug() << "ITabs File";
         if (!this->parseXMLFile(file, data)) {
             data->clear();
             return false;
@@ -52,15 +52,6 @@ bool FileManager::openFile(DataManager *&dataManager) {
         QString msg = "We are unable to read '";
         msg.append(filename);
         msg.append("' file, due to its wrong file type.\n\n");
-        msg.append("Accepted file types :\n");
-
-        size_t size = sizeof acceptedFileTypes / sizeof(QString);
-        for (size_t i = 1; i < size; i++) {
-            qDebug() << i;
-            msg.append("\t- ");
-            msg.append(acceptedFileTypes[i]);
-            msg.append("\n");
-        }
 
         QMessageBox::warning(attachedWidget, "Wrong file format", msg, QMessageBox::Ok);
         return false;
@@ -73,8 +64,8 @@ bool FileManager::openFile(DataManager *&dataManager) {
 bool FileManager::saveFile(DataManager *dataManager) {
     const QStandardItemModel *cells = dataManager->getCells();
     QFileDialog fileDialog;
-    QString defaultSelection = this->acceptedFileTypes[1];
-    QString filename = fileDialog.getSaveFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), this->acceptedFileTypes[2], &defaultSelection);
+    QString defaultSelection = this->acceptedSaveFileTypes;
+    QString filename = fileDialog.getSaveFileName(attachedWidget, "Open file", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), this->acceptedSaveFileTypes, &defaultSelection);
 
     if (filename == "")
         return false;
@@ -133,19 +124,6 @@ bool FileManager::saveFile(DataManager *dataManager) {
     file.close();
 
     return true;
-}
-
-QString FileManager::getAcceptedFileTypes() {
-    QString res = "";
-    QString token = ";;";
-
-    for (QString str : this->acceptedFileTypes) {
-        res += str + token;
-    }
-
-    res = res.left(res.length() - 2);
-
-    return res;
 }
 
 bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {

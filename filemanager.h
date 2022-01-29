@@ -11,19 +11,15 @@
 class FileManager
 {
 public:
-    const QString acceptedFileTypes[3] = {
-        "All files (*.*)",
-        "CSV File (*.csv)",
-        "ITabs File (*.itabs)"
-    };
+    const QString acceptedOpenFileTypes = "CSV/ITabs File (*.csv *.itabs)";
+    const QString acceptedSaveFileTypes = "ITabs File (*.itabs)";
+
     FileManager(QWidget * attachedWidget);
     bool openFile(DataManager *&dataManager);
     bool saveFile(DataManager *dataManager);
 
 private:
     QWidget * attachedWidget;
-
-    QString getAcceptedFileTypes();
     bool parseCSVFile(QFile &file, QStandardItemModel * data);
     bool parseXMLFile(QFile &file, QStandardItemModel * data);
 };

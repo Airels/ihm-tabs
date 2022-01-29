@@ -20,8 +20,6 @@ public:
     QStandardItemModel * getCells();
     void generateRandomValue(int row, int column);
     void apply_filter_fixed_color(QModelIndexList indexList, QColor color);
-
-public slots:
     void apply_filter_min_max(QModelIndexList indexList, QColor gradientMin, QColor gradientMax);
     void apply_filter_simplified_condition(QModelIndexList indexList, double value, QColor underColor, QColor equalColor, QColor aboveColor);
     void apply_filter_modulo(QModelIndexList indexList, int moduloValue, QColor color);

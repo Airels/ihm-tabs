@@ -16,7 +16,7 @@ public:
     QModelIndexList *selectionIndexes();
 
 signals:
-    void selectionChanged(const QModelIndexList &selectedIndexes);
+    void selectionUpdated(const QModelIndexList &selectedIndexes);
 
 protected slots:
     void updateSelection(const QItemSelection &selected);

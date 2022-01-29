@@ -26,7 +26,7 @@ MainWindow::~MainWindow()
 void MainWindow::initAttributes() {
     dataManager = nullptr;
     fileManager = new FileManager(this);
-    viewManager = new ViewManager(ui->_tableView);
+
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
@@ -80,7 +80,8 @@ void MainWindow::actionOpenFile() {
         QStandardItemModel *model = dataManager->getCells();
         resetInterface();
         setEnabled(true);
-        viewManager->tableView()->setModel(model);
+        viewManager = new ViewManager(ui->_tableView, model);
+        //viewManager->tableView()->setModel(model);
         ui->_tableView->setModel(viewManager->tableView()->model());
     }
 }

@@ -29,7 +29,6 @@ MainWindow::~MainWindow()
 void MainWindow::initAttributes() {
     dataManager = nullptr;
     fileManager = new FileManager(this);
-    viewManager = new ViewManager(ui->_tableView);
     activateFilterManager = nullptr;
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
@@ -86,7 +85,7 @@ void MainWindow::actionOpenFile() {
         QStandardItemModel *model = dataManager->getCells();
         resetInterface();
         setEnabled(true);
-        viewManager->tableView()->setModel(model);
+        viewManager = new ViewManager(ui->_tableView, model);
         ui->_tableView->setModel(viewManager->tableView()->model());
     }
 }
@@ -125,8 +124,8 @@ void MainWindow::activateFilter() {
 
 void MainWindow::applyFilter() {
     qDebug() << "[USER ACTION] button 'Apply' clicked";
-    QModelIndexList* model = viewManager->selectionIndexes();
+    QModelIndexList model = viewManager->tableView()->selectionModel()->selectedIndexes();
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
-    activateFilterManager->applyFilter(model, categoryIndex, toolIndex);
+    activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
 }

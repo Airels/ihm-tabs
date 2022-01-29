@@ -77,7 +77,6 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
             break;
         case 1: //Fixed Color
             QColor* color = new QColor(255,0,0);
-            //todo avoid crash
             this->dataManager->apply_filter_fixed_color(*model, *color);
             delete color;
             break;

@@ -3,6 +3,7 @@
 #include <QLayoutItem>
 #include <QLabel>
 #include <QSpinBox>
+#include <QGridLayout>
 
 ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, ViewManager* viewManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
@@ -56,6 +57,7 @@ void ActivateFilterManager::setFilterName(QString name) {
 }
 
 void ActivateFilterManager::openFixedColor() {
+    //_activeFilterLayout = new GridLayout();
     this->_activeFilter->setLayout(_activeFilterLayout);
     QLabel* label = new QLabel("Color Value");
     QSpinBox* rSpin = new QSpinBox(); rSpin->setMaximum(255); rSpin->setMinimum(0);
@@ -71,13 +73,13 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
     switch(categoryIndex) {
     case 0:
         switch(toolIndex) {
-        case 0:
+        case 0: //Gradient Color
             break;
-        case 1:
-            qDebug() << "filter fixed color";
-            //todo get data from layout
+        case 1: //Fixed Color
             QColor* color = new QColor(255,0,0);
-            dataManager->apply_filter_fixed_color(*model, *color);
+            //todo avoid crash
+            this->dataManager->apply_filter_fixed_color(*model, *color);
+            delete color;
             break;
         }
         break;

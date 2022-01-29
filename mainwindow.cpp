@@ -30,7 +30,7 @@ void MainWindow::initAttributes() {
     dataManager = nullptr;
     fileManager = new FileManager(this);
     viewManager = new ViewManager(ui->_tableView);
-    activateFilterManager = new ActivateFilterManager(ui->_activeFilter, ui->_applyFilterBtn);
+    activateFilterManager = new ActivateFilterManager(dataManager, viewManager, ui->_activeFilter, ui->_applyFilterBtn);
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
@@ -119,8 +119,6 @@ void MainWindow::activateFilter() {
     qDebug() << "[USER ACTION] 'activated new filer from category " << categoryIndex << " and tool index " << toolIndex;
     activateFilterManager->setFilterName(ui->_treeFilter->currentItem()->text(0));
     activateFilterManager->handle(categoryIndex, toolIndex);
-    //test
-    QVBoxLayout* _activeFilterLayout = new QVBoxLayout;
 }
 
 void MainWindow::applyFilter() {

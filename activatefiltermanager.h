@@ -1,6 +1,8 @@
 #ifndef ACTIVATEFILTERMANAGER_H
 #define ACTIVATEFILTERMANAGER_H
 #include <QObject>
+#include "datamanager.h"
+#include "viewmanager.h"
 #include <QApplication>
 #include <QWidget>
 #include <QDebug>
@@ -11,17 +13,26 @@
 class ActivateFilterManager : public QObject
 {
 public:
-    ActivateFilterManager(QGroupBox* _activeFilter, QPushButton* _applyFilterBtn);
+    ActivateFilterManager(DataManager* dataManager, ViewManager* viewManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn);
     ~ActivateFilterManager();
-    QWidget* handle(int categoryIndex, int toolIndex);
+    void handle(int categoryIndex, int toolIndex);
     void setFilterName(QString name);
+
+public slots:
+    void applyFixedColor();
+
 private:
     void clearSelection();
-    void updateSelection(QWidget*& filterMenu);
+    void updateSelection();
     QGroupBox* _activeFilter;
     QPushButton* _applyFilterBtn;
     QVBoxLayout* _activeFilterLayout;
+    DataManager* dataManager;
+    ViewManager* viewManager;
+
     QString* name = nullptr;
+    //filters
+    void openFixedColor();
 };
 
 #endif // ACTIVATEFILTERMANAGER_H

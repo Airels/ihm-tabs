@@ -5,6 +5,7 @@
 #include "modulofilter.h"
 #include <float.h>
 #include <QRandomGenerator>
+#include <QDebug>
 
 DataManager::DataManager()
 {
@@ -16,6 +17,7 @@ DataManager::~DataManager() {
 }
 
 void DataManager::apply_filter_fixed_color(QModelIndexList indexList, QColor color) {
+    qDebug() << "[USER ACTION] button 'Apply FIXED COLOR'";
     Filter *filter = new FixedColorFilter(color);
     apply_filter(filter, indexList);
     delete filter;

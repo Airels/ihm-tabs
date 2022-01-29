@@ -30,6 +30,7 @@ private:
     QAction* _actionSaveAs;
     QAction* _actionExportAs;
     QAction* _actionGenerate;
+    QVBoxLayout* _activeFilterLayout;
 
     void initAttributes();
     void initSignals();

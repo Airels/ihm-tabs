@@ -1,17 +1,14 @@
 #include "cell.h"
+#include <QDebug>
 
 Cell::Cell(double value, QColor color) {
-    this->value = value;
-    this->color = color;
-    this->setText(QString::number(value));
+    this->setValue(value);
     this->setColor(color);
 }
 
 Cell::Cell(double value) {
-    this->value = value;
-    this->color = QColor(255, 255, 255);
-    this->setText(QString::number(value));
-    this->setColor(this->color);
+    this->setValue(value);
+    this->setColor(QColor(255, 255, 255));
 }
 
 Cell::~Cell() {
@@ -24,6 +21,7 @@ double Cell::getvalue() {
 
 void Cell::setValue(double value) {
     this->value = value;
+    this->setText(QString::number(value));
 }
 
 QColor Cell::getColor() {
@@ -32,6 +30,8 @@ QColor Cell::getColor() {
 
 void Cell::setColor(QColor color) {
     this->color = color;
+    QBrush* brush = new QBrush(this->color);
+    this->setBackground(*brush);
 }
 
 bool Cell::isUpdatable() {

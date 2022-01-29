@@ -51,6 +51,7 @@ void MainWindow::initSignals() {
     connect(_actionExportAs, SIGNAL(triggered()), this, SLOT(actionExportAs()));
     connect(_actionGenerate, SIGNAL(triggered()), this, SLOT(actionGenerate()));
     connect(ui->_treeFilter,SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(activateFilter()));
+    connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
 }
 
 void MainWindow::resetInterface() {
@@ -123,4 +124,8 @@ void MainWindow::activateFilter() {
 
 void MainWindow::applyFilter() {
     qDebug() << "[USER ACTION] button 'Apply' clicked";
+    QModelIndexList* model = viewManager->selectionIndexes();
+    int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
+    int toolIndex = ui->_treeFilter->currentIndex().row();
+    activateFilterManager->applyFilter(model, categoryIndex, toolIndex);
 }

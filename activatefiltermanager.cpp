@@ -63,10 +63,25 @@ void ActivateFilterManager::openFixedColor() {
     this->_activeFilterLayout->addWidget(label);
     this->_activeFilterLayout->addWidget(rSpin);
     updateSelection();
-    connect(this->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFixedColor()));
 }
 
-/* SLOTS */
-void ActivateFilterManager::applyFixedColor() {
-    qDebug() << "[USER ACTION] apply fixed color filter";
+
+void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex) {
+    qDebug() << "[USER ACTION] apply fixed color filter 2";
+    switch(categoryIndex) {
+    case 0:
+        switch(toolIndex) {
+        case 0:
+            break;
+        case 1:
+            qDebug() << "filter fixed color";
+            //todo get data from layout
+            QColor* color = new QColor(255,0,0);
+            dataManager->apply_filter_fixed_color(*model, *color);
+            break;
+        }
+        break;
+    case 1:
+        break;
+    }
 }

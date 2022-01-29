@@ -17,9 +17,7 @@ public:
     ~ActivateFilterManager();
     void handle(int categoryIndex, int toolIndex);
     void setFilterName(QString name);
-
-public slots:
-    void applyFixedColor();
+    void applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex);
 
 private:
     void clearSelection();
@@ -29,7 +27,6 @@ private:
     QVBoxLayout* _activeFilterLayout;
     DataManager* dataManager;
     ViewManager* viewManager;
-
     QString* name = nullptr;
     //filters
     void openFixedColor();

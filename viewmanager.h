@@ -13,18 +13,15 @@ public:
     ViewManager(QTableView *tableView, QAbstractItemModel *model);
     ViewManager(QTableView *tableView, QAbstractItemModel *model, QItemSelectionModel *selectionModel);
     QTableView *tableView();
-    QModelIndexList *selectionIndexes();
 
 signals:
-    void selectionChanged(const QModelIndexList &selectedIndexes);
+    void selectionUpdated(const QModelIndexList &selectedIndexes);
 
 protected slots:
     void updateSelection(const QItemSelection &selected);
 
 private:
     void setConnexions();
-
-    QModelIndexList *mySelectionIndexes;
     QTableView *myTableView;
 };
 

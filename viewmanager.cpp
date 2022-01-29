@@ -1,4 +1,5 @@
 #include "viewmanager.h"
+#include <QDebug>
 
 ViewManager::ViewManager(QTableView *tableView){
      myTableView = tableView;
@@ -27,24 +28,17 @@ ViewManager::ViewManager(QTableView *tableView, QAbstractItemModel *model, QItem
 
 
 void ViewManager::setConnexions(){
-    connect(myTableView->selectionModel(),SIGNAL(selectionChanged),
-            this, SLOT(updateSelection));
+    connect(myTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &ViewManager::updateSelection);
 }
 
 /*SLOTS*/
 void ViewManager::updateSelection(const QItemSelection &selected){
-    *mySelectionIndexes = selected.indexes();
-    emit ViewManager::selectionChanged(*mySelectionIndexes);
+    emit ViewManager::selectionUpdated(selected.indexes());
 }
 
 //getters
 QTableView *ViewManager::tableView(){
     return myTableView;
 }
-
-QModelIndexList *ViewManager::selectionIndexes()
-{
-    return mySelectionIndexes;
-}
-
 

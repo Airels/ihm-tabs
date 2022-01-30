@@ -14,6 +14,7 @@ SOURCES += \
     datamanager.cpp \
     filemanager.cpp \
     filter.cpp \
+    fixedcolordialog.cpp \
     fixedcolorfilter.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     datamanager.h \
     filemanager.h \
     filter.h \
+    fixedcolordialog.h \
     fixedcolorfilter.h \
     mainwindow.h \
     minmaxfilter.h \
@@ -38,6 +40,7 @@ HEADERS += \
     viewmanager.h
 
 FORMS += \
+    fixedcolordialog.ui \
     mainwindow.ui \
     tablewidget.ui
 

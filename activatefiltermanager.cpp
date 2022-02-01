@@ -11,6 +11,7 @@ ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, ViewManag
     this->_applyFilterBtn = _applyFilterBtn;
     this->gradientColorDialog =  new GradientColorDialog();
     this->fixedColorDialog = new FixedColorDialog();
+    this->moduloColorDialog = new ModuloColorDialog();
     createLayout();
 }
 
@@ -41,6 +42,13 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
         }
         break;
     case 1:
+        switch(toolIndex) {
+        case 0:
+            break;
+        case 1:
+            openModuloColor();
+            break;
+        }
         break;
     }
 }
@@ -76,6 +84,11 @@ void ActivateFilterManager::openGradientColor() {
     updateSelection();
 }
 
+void ActivateFilterManager::openModuloColor() {
+    this->_activeFilterLayout->addWidget(this->moduloColorDialog);
+    updateSelection();
+}
+
 
 void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex) {
     qDebug() << "[USER ACTION] apply fixed color filter 2";
@@ -98,6 +111,17 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
         }
         break;
     case 1:
+        switch(toolIndex) {
+        case 0: //Condition
+            break;
+        case 1: //Modulo
+            if (this->moduloColorDialog != nullptr) {
+                QColor color = this->moduloColorDialog->getSelectedColor();
+                int value = this->moduloColorDialog->getSelectedValue();
+                this->dataManager->apply_filter_modulo(*model, value, color);
+            }
+            break;
+        }
         break;
     }
 }

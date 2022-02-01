@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     activatefiltermanager.cpp \
     cell.cpp \
+    conditionalcolordialog.cpp \
     datamanager.cpp \
     filemanager.cpp \
     filter.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     minmaxfilter.cpp \
+    modulocolordialog.cpp \
     modulofilter.cpp \
     simplifiedconditionfilter.cpp \
     tablewidget.cpp \
@@ -28,6 +30,7 @@ SOURCES += \
 HEADERS += \
     activatefiltermanager.h \
     cell.h \
+    conditionalcolordialog.h \
     datamanager.h \
     filemanager.h \
     filter.h \
@@ -36,15 +39,18 @@ HEADERS += \
     gradientcolordialog.h \
     mainwindow.h \
     minmaxfilter.h \
+    modulocolordialog.h \
     modulofilter.h \
     simplifiedconditionfilter.h \
     tablewidget.h \
     viewmanager.h
 
 FORMS += \
+    conditionalcolordialog.ui \
     fixedcolordialog.ui \
     gradientcolordialog.ui \
     mainwindow.ui \
+    modulocolordialog.ui \
     tablewidget.ui
 
 RESOURCES += resources.qrc

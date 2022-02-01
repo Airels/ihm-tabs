@@ -1,9 +1,11 @@
 #ifndef ACTIVATEFILTERMANAGER_H
 #define ACTIVATEFILTERMANAGER_H
 #include <QObject>
+#include "conditionalcolordialog.h"
 #include "datamanager.h"
 #include "fixedcolordialog.h"
 #include "gradientcolordialog.h"
+#include "modulocolordialog.h"
 #include "viewmanager.h"
 #include <QApplication>
 #include <QWidget>
@@ -34,9 +36,13 @@ private:
     //filters
     void openFixedColor();
     void openGradientColor();
+    void openConditionalColor();
+    void openModuloColor();
     //filters item
     FixedColorDialog* fixedColorDialog = nullptr;
     GradientColorDialog* gradientColorDialog = nullptr;
+    ConditionalColorDialog* conditionalColorDialog = nullptr;
+    ModuloColorDialog* moduloColorDialog = nullptr;
 };
 
 #endif // ACTIVATEFILTERMANAGER_H

@@ -21,7 +21,6 @@ SOURCES += \
     minmaxfilter.cpp \
     modulofilter.cpp \
     simplifiedconditionfilter.cpp \
-    tablewidget.cpp \
     viewmanager.cpp
 
 HEADERS += \
@@ -36,13 +35,11 @@ HEADERS += \
     minmaxfilter.h \
     modulofilter.h \
     simplifiedconditionfilter.h \
-    tablewidget.h \
     viewmanager.h
 
 FORMS += \
     fixedcolordialog.ui \
-    mainwindow.ui \
-    tablewidget.ui
+    mainwindow.ui
 
 RESOURCES += resources.qrc
 

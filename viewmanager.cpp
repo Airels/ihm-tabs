@@ -1,5 +1,7 @@
 #include "viewmanager.h"
+#include "cell.h"
 #include <QDebug>
+
 
 ViewManager::ViewManager(QTableView *tableView){
      myTableView = tableView;
@@ -8,23 +10,27 @@ ViewManager::ViewManager(QTableView *tableView){
      setConnexions();
 }
 
-ViewManager::ViewManager(QTableView *tableView, QAbstractItemModel *model)
+ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
 {
     myTableView = tableView;
-    myTableView->setModel(model);
+    myModel = model;
+    myTableView->setModel(myModel);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     myTableView->update();
+    updateImage();
     setConnexions();
 }
 
-ViewManager::ViewManager(QTableView *tableView, QAbstractItemModel *model, QItemSelectionModel *selectionModel)
+ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItemSelectionModel *selectionModel)
 {
     myTableView = tableView;
     myTableView->setModel(model);
     myTableView->setSelectionModel(selectionModel);
     myTableView->update();
+    updateImage();
     setConnexions();
 }
+
 
 
 void ViewManager::setConnexions(){
@@ -32,13 +38,29 @@ void ViewManager::setConnexions(){
             this, &ViewManager::updateSelection);
 }
 
+
+
 /*SLOTS*/
 void ViewManager::updateSelection(const QItemSelection &selected){
     emit ViewManager::selectionUpdated(selected.indexes());
 }
 
+void ViewManager::updateImage(){
+    int rowCount = myModel->rowCount();
+    int columnCount = myModel->columnCount();
+    for (int r = 0; r < rowCount; r++){
+        for (int c = 0; c < columnCount; c++){
+           Cell *currentCell = (Cell*) myModel->item(c, r);
+           myImage->setPixelColor(c, r, currentCell->getColor());
+        }
+    }
+}
+
 //getters
-QTableView *ViewManager::tableView(){
+QTableView *ViewManager::getTableView(){
     return myTableView;
 }
 
+QImage *ViewManager::getImage(){
+    return myImage;
+}

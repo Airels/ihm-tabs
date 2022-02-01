@@ -52,13 +52,19 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>500</height>
+     </size>
+    </property>
     <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
        <width>211</width>
-       <height>328</height>
+       <height>636</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -201,7 +207,7 @@
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>100</height>
+            <height>300</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -288,12 +294,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>365</x>
-     <y>84</y>
+     <x>104</x>
+     <y>83</y>
     </hint>
     <hint type="destinationlabel">
-     <x>385</x>
-     <y>79</y>
+     <x>171</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -304,12 +310,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>358</x>
-     <y>136</y>
+     <x>104</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
-     <x>380</x>
-     <y>127</y>
+     <x>171</x>
+     <y>126</y>
     </hint>
    </hints>
   </connection>
@@ -320,12 +326,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>338</x>
-     <y>40</y>
+     <x>104</x>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
-     <x>410</x>
-     <y>35</y>
+     <x>171</x>
+     <y>42</y>
     </hint>
    </hints>
   </connection>

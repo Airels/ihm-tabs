@@ -7,23 +7,29 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>455</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>-2</x>
      <y>0</y>
      <width>200</width>
      <height>500</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -344,7 +350,7 @@
          <x>0</x>
          <y>0</y>
          <width>211</width>
-         <height>328</height>
+         <height>436</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -480,7 +486,7 @@
             <property name="minimumSize">
              <size>
               <width>25</width>
-              <height>100</height>
+              <height>300</height>
              </size>
             </property>
             <property name="maximumSize">

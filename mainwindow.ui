@@ -118,7 +118,7 @@
          <bool>false</bool>
         </property>
         <attribute name="title">
-         <string>Pixel Represenation</string>
+         <string>Image Represenation</string>
         </attribute>
        </widget>
       </widget>

@@ -18,7 +18,7 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
     myTableView->setModel(myModel);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     myTableView->update();
-    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_RGB32);
     //updateImage();
     setConnexions();
 }
@@ -29,7 +29,7 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItem
     myTableView->setModel(model);
     myTableView->setSelectionModel(selectionModel);
     myTableView->update();
-    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_RGB32);
     //updateImage();
     setConnexions();
 }

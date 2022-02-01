@@ -17,13 +17,13 @@ public:
     //~ViewManager();//TODO
     QTableView *getTableView();
     QImage *getImage();
+    void updateImage();
 
 signals:
     void selectionUpdated(const QModelIndexList &selectedIndexes);
 
 protected slots:
     void updateSelection(const QItemSelection &selected);
-    void updateImage();
 
 private:
 

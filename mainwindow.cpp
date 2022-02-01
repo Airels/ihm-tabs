@@ -137,4 +137,7 @@ void MainWindow::applyFilter() {
 }
 void MainWindow::currentTabUpdated(int index) {
     if (index != 1) return;
+
+    viewManager->updateImage();
+    // imageViewer.setImage(viewManager->getImage());
 }

@@ -143,7 +143,7 @@ void MainWindow::applyFilter() {
 void MainWindow::currentTabUpdated(int index) {
     if (index != 1) return;
     if (viewManager == nullptr) {
-        qDebug() << "viewManager not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
+        //qDebug() << "viewManager not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
         return;
     }
     viewManager->updateImage();

@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -80,7 +80,7 @@
          <x>0</x>
          <y>0</y>
          <width>211</width>
-         <height>328</height>
+         <height>436</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -216,7 +216,7 @@
             <property name="minimumSize">
              <size>
               <width>25</width>
-              <height>100</height>
+              <height>300</height>
              </size>
             </property>
             <property name="maximumSize">

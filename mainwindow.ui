@@ -45,10 +45,28 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
          <height>16777215</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
        <property name="currentIndex">
@@ -118,8 +136,38 @@
          <bool>false</bool>
         </property>
         <attribute name="title">
-         <string>Image Represenation</string>
+         <string>Image Representation</string>
         </attribute>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QFrame" name="_imageView">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="lineWidth">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="_toolsWidget" native="true">
@@ -142,6 +190,12 @@
         <size>
          <width>200</width>
          <height>16777215</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
        <property name="autoFillBackground">
@@ -183,12 +237,12 @@
            </property>
            <item>
             <property name="text">
-             <string>Gradient Color</string>
+             <string>Gradient</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Fixed Color</string>
+             <string>Fixed</string>
             </property>
            </item>
           </item>
@@ -201,7 +255,7 @@
            </property>
            <item>
             <property name="text">
-             <string>Conditional Value</string>
+             <string>Conditionnal</string>
             </property>
            </item>
            <item>

@@ -30,8 +30,8 @@ QColor Cell::getColor() {
 
 void Cell::setColor(QColor color) {
     this->color = color;
-    QBrush* brush = new QBrush(this->color);
-    this->setBackground(*brush);
+    QBrush brush = QBrush(this->color);
+    this->setBackground(brush);
 }
 
 bool Cell::isUpdatable() {

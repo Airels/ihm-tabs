@@ -7,6 +7,7 @@ ViewManager::ViewManager(QTableView *tableView){
      myTableView = tableView;
      myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
      myTableView->update();
+     myImage = nullptr;
      setConnexions();
 }
 
@@ -17,6 +18,7 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
     myTableView->setModel(myModel);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     myTableView->update();
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
     updateImage();
     setConnexions();
 }
@@ -27,6 +29,7 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItem
     myTableView->setModel(model);
     myTableView->setSelectionModel(selectionModel);
     myTableView->update();
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
     updateImage();
     setConnexions();
 }
@@ -46,16 +49,20 @@ void ViewManager::updateSelection(const QItemSelection &selected){
 }
 
 void ViewManager::updateImage(){
-    /*
-    int rowCount = myModel->rowCount();
+    if (myImage == nullptr){
+        qDebug() << "myImage not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
+        return;
+    }
     int columnCount = myModel->columnCount();
-    for (int r = 0; r < rowCount; r++){
-        for (int c = 0; c < columnCount; c++){
+    int rowCount = myModel->rowCount();
+    for (int c = 0;  c < rowCount; c++){
+        for (int r = 0; r < columnCount; r++){
            Cell *currentCell = (Cell*) myModel->item(c, r);
+           qDebug() << "set Pixel Color : x=" << c <<", y="<<r<<"color = " <<currentCell->getColor()<<Qt::endl;
            myImage->setPixelColor(c, r, currentCell->getColor());
         }
     }
-    */
+
 }
 
 //getters

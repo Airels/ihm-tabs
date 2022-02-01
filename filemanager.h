@@ -18,6 +18,7 @@ public:
     FileManager(QWidget * attachedWidget);
     bool openFile(DataManager *&dataManager);
     bool saveFile(DataManager *dataManager);
+    bool saveImage(const QImage *image;
 
 private:
     QWidget * attachedWidget;

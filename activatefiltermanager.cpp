@@ -11,6 +11,7 @@ ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, ViewManag
     this->_applyFilterBtn = _applyFilterBtn;
     this->gradientColorDialog =  new GradientColorDialog();
     this->fixedColorDialog = new FixedColorDialog();
+    this->conditionalColorDialog = new ConditionalColorDialog();
     this->moduloColorDialog = new ModuloColorDialog();
     createLayout();
 }
@@ -19,6 +20,8 @@ ActivateFilterManager::~ActivateFilterManager() {
     delete this->name;
     delete this->gradientColorDialog;
     delete this->fixedColorDialog;
+    delete this->conditionalColorDialog;
+    delete this->moduloColorDialog;
 }
 
 void ActivateFilterManager::createLayout() {
@@ -44,6 +47,7 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
     case 1:
         switch(toolIndex) {
         case 0:
+            openConditionalColor();
             break;
         case 1:
             openModuloColor();
@@ -84,6 +88,11 @@ void ActivateFilterManager::openGradientColor() {
     updateSelection();
 }
 
+void ActivateFilterManager::openConditionalColor() {
+    this->_activeFilterLayout->addWidget(this->conditionalColorDialog);
+    updateSelection();
+}
+
 void ActivateFilterManager::openModuloColor() {
     this->_activeFilterLayout->addWidget(this->moduloColorDialog);
     updateSelection();
@@ -113,6 +122,13 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
     case 1:
         switch(toolIndex) {
         case 0: //Condition
+            if (this->conditionalColorDialog != nullptr) {
+                QColor colorMin = this->conditionalColorDialog->getSelectedColorMin();
+                QColor colorEqual = this->conditionalColorDialog->getSelectedColorEqual();
+                QColor colorMax = this->conditionalColorDialog->getSelectedColorMax();
+                int value = this->conditionalColorDialog->getSelectedValue();
+                this->dataManager->apply_filter_simplified_condition(*model, value, colorMin, colorEqual, colorMax);
+            }
             break;
         case 1: //Modulo
             if (this->moduloColorDialog != nullptr) {

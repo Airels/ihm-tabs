@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>733</height>
+    <height>757</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="_tableTab">
         <property name="sizePolicy">
@@ -270,7 +270,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>25</height>
+     <height>29</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -339,9 +339,28 @@
     </hint>
     <hint type="destinationlabel">
      <x>1165</x>
-     <y>-18</y>
+     <y>0</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_tabWidget</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>currentTabUpdated(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>317</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>446</x>
+     <y>37</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>currentTabUpdated(int)</slot>
+ </slots>
 </ui>

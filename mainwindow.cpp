@@ -34,7 +34,7 @@ void MainWindow::initAttributes() {
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
     ui->_menuFile->addSeparator();
-    _actionSaveAs = ui->_menuFile->addAction("Save As Itabs");
+    _actionSaveAs = ui->_menuFile->addAction("Save As ITabs");
     _actionExportAs = ui->_menuFile->addAction("Export As Image");
     _actionGenerate = ui->_menuTools->addAction("Generate");
 
@@ -134,4 +134,7 @@ void MainWindow::applyFilter() {
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
+}
+void MainWindow::currentTabUpdated(int index) {
+    if (index != 1) return;
 }

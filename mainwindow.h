@@ -47,5 +47,7 @@ protected slots:
 
     void activateFilter();
     void applyFilter();
+    void currentTabUpdated(int index);
+
 };
 #endif // MAINWINDOW_H

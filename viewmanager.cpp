@@ -46,6 +46,7 @@ void ViewManager::updateSelection(const QItemSelection &selected){
 }
 
 void ViewManager::updateImage(){
+    /*
     int rowCount = myModel->rowCount();
     int columnCount = myModel->columnCount();
     for (int r = 0; r < rowCount; r++){
@@ -54,6 +55,7 @@ void ViewManager::updateImage(){
            myImage->setPixelColor(c, r, currentCell->getColor());
         }
     }
+    */
 }
 
 //getters

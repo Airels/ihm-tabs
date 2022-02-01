@@ -86,7 +86,7 @@ void MainWindow::actionOpenFile() {
         resetInterface();
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
-        ui->_tableView->setModel(viewManager->tableView()->model());
+        ui->_tableView->setModel(viewManager->getTableView()->model());
     }
 }
 
@@ -130,7 +130,7 @@ void MainWindow::activateFilter() {
 
 void MainWindow::applyFilter() {
     qDebug() << "[USER ACTION] button 'Apply' clicked";
-    QModelIndexList model = viewManager->tableView()->selectionModel()->selectedIndexes();
+    QModelIndexList model = viewManager->getTableView()->selectionModel()->selectedIndexes();
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);

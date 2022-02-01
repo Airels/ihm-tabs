@@ -13,7 +13,7 @@ class FileManager
 public:
     const QString acceptedOpenFileTypes = "CSV/ITabs File (*.csv *.itabs)";
     const QString acceptedSaveFileTypes = "ITabs File (*.itabs)";
-    const QString acceptedSaveImageTypes = "Bitmap (*.bmp);;PNG Image (*.png);;JPG Image (*.jpg)";
+    const QString acceptedSaveImageTypes = "Bitmap Image (*.bmp);;PNG Image (*.png);;JPG Image (*.jpg);;SVG Image (*.svg)";
 
     FileManager(QWidget * attachedWidget);
     bool openFile(DataManager *&dataManager);

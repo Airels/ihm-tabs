@@ -4,16 +4,18 @@
 #include <QResizeEvent>
 #include <QImageReader>
 #include <QImage>
+#include "mainwindow.h"
 
 ImageWidget::ImageWidget(QWidget *parent) :
     QWidget(parent)
 {
     setupUi(this);
     label->setMinimumSize(1, 1);
+    // label->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    this->image = new QImage(1, 1, QImage::Format::Format_RGB888);
 }
 
 void ImageWidget::setImage(QImage *image) {
-    if (this->image != nullptr) delete this->image;
     this->image = image;
 
     QPixmap pixmap = QPixmap::fromImage(*image);
@@ -23,5 +25,5 @@ void ImageWidget::setImage(QImage *image) {
 void ImageWidget::resizeEvent(QResizeEvent *pQEvent) {
     QPixmap pixmap = QPixmap::fromImage(*image);
     label->setPixmap(pixmap.scaled(label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    qDebug() << "Resized";
+    qDebug() << "Resize";
 }

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     initSignals();
 
     this->imageWidget = new ImageWidget(this);
-    ui->_imageView->addWidget(this->imageWidget);
+    ui->_tabWidget->addTab(this->imageWidget, "Image representation");
 }
 
 MainWindow::~MainWindow()
@@ -96,6 +96,7 @@ void MainWindow::actionOpenFile() {
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
         ui->_tableView->setModel(viewManager->getTableView()->model());
+        imageWidget->setImage(viewManager->getImage());
     }
 }
 
@@ -150,10 +151,6 @@ void MainWindow::applyFilter() {
 void MainWindow::currentTabUpdated(int index) {
     if (index != 1 || imageWidget == nullptr) return;
 
-    QImageReader reader("D:\\yohan\\Pictures\\Arknights\\eab479ea703749c8f4c1a4e2074d7abd.png");
-    QImage image;
-    image = reader.read();
-    imageWidget->setImage(&image);
     viewManager->updateImage();
-    imageWidget->setImage(viewManager->getImage());
+    // imageWidget->setImage(viewManager->getImage());
 }

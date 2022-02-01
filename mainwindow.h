@@ -6,6 +6,7 @@
 #include "datamanager.h"
 #include "filemanager.h"
 #include "activatefiltermanager.h"
+#include "imagewidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,6 +32,7 @@ private:
     QAction* _actionExportAs;
     QAction* _actionGenerate;
     QVBoxLayout* _activeFilterLayout;
+    ImageWidget *imageWidget = nullptr;
 
     void initAttributes();
     void initSignals();

@@ -12,16 +12,16 @@ ImageWidget::ImageWidget(QWidget *parent) :
     label->setMinimumSize(1, 1);
 }
 
-void ImageWidget::setImage(const QString filename) {
-    // this->img = QPixmap(filename);
-    QImageReader reader(filename);
-    image = reader.read();
+void ImageWidget::setImage(QImage *image) {
+    if (this->image != nullptr) delete this->image;
+    this->image = image;
 
-    QPixmap pixmap = QPixmap::fromImage(image);
+    QPixmap pixmap = QPixmap::fromImage(*image);
     label->setPixmap(pixmap.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void ImageWidget::resizeEvent(QResizeEvent *pQEvent) {
-    QPixmap pixmap = QPixmap::fromImage(image);
+    QPixmap pixmap = QPixmap::fromImage(*image);
     label->setPixmap(pixmap.scaled(label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    qDebug() << "Resized";
 }

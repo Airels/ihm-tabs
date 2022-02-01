@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QIcon>
 #include <QCheckBox>
+#include <QStackedWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowIcon(QIcon(":/icon.png"));
     initAttributes();
     initSignals();
+
+    this->imageWidget = new ImageWidget(this);
+    ui->_imageView->addWidget(this->imageWidget);
 }
 
 MainWindow::~MainWindow()
@@ -135,9 +139,19 @@ void MainWindow::applyFilter() {
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
 }
-void MainWindow::currentTabUpdated(int index) {
-    if (index != 1) return;
 
+#include <QImageReader>
+
+void MainWindow::currentTabUpdated(int index) {
+    if (index != 1 || imageWidget == nullptr) return;
+
+    QImageReader reader("D:\\yohan\\Pictures\\Arknights\\eab479ea703749c8f4c1a4e2074d7abd.png");
+    QImage image;
+    image = reader.read();
+    imageWidget->setImage(&image);
+
+    /*
     viewManager->updateImage();
-    // imageViewer.setImage(viewManager->getImage());
+    imageWidget->setImage(viewManager->getImage());
+    */
 }

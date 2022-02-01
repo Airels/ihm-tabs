@@ -30,6 +30,7 @@ private:
     QString* name = nullptr;
     //filters
     void openFixedColor();
+    void openGradientColor();
 };
 
 #endif // ACTIVATEFILTERMANAGER_H

@@ -2,6 +2,8 @@
 #define ACTIVATEFILTERMANAGER_H
 #include <QObject>
 #include "datamanager.h"
+#include "fixedcolordialog.h"
+#include "gradientcolordialog.h"
 #include "viewmanager.h"
 #include <QApplication>
 #include <QWidget>
@@ -22,6 +24,7 @@ public:
 private:
     void clearSelection();
     void updateSelection();
+    void createLayout();
     QGroupBox* _activeFilter;
     QPushButton* _applyFilterBtn;
     QVBoxLayout* _activeFilterLayout;
@@ -31,6 +34,9 @@ private:
     //filters
     void openFixedColor();
     void openGradientColor();
+    //filters item
+    FixedColorDialog* fixedColorDialog = nullptr;
+    GradientColorDialog* gradientColorDialog = nullptr;
 };
 
 #endif // ACTIVATEFILTERMANAGER_H

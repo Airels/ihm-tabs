@@ -12,7 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    qDebug() << "mainWindowConstructor" << Qt::endl;
+    dataManager = nullptr;
+    viewManager = nullptr;
+    fileManager = new FileManager(this);
+    activateFilterManager = nullptr;
     ui->setupUi(this);
+    qDebug() << "setupUI" << Qt::endl;
     this->setWindowIcon(QIcon(":/icon.png"));
     initAttributes();
     initSignals();
@@ -31,9 +37,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initAttributes() {
-    dataManager = nullptr;
-    fileManager = new FileManager(this);
-    activateFilterManager = nullptr;
+    qDebug() << "init attributes" << Qt::endl;
+
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
@@ -149,9 +154,6 @@ void MainWindow::currentTabUpdated(int index) {
     QImage image;
     image = reader.read();
     imageWidget->setImage(&image);
-
-    /*
     viewManager->updateImage();
     imageWidget->setImage(viewManager->getImage());
-    */
 }

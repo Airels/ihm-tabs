@@ -7,6 +7,7 @@ ViewManager::ViewManager(QTableView *tableView){
      myTableView = tableView;
      myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
      myTableView->update();
+     myImage = nullptr;
      setConnexions();
 }
 
@@ -17,7 +18,8 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
     myTableView->setModel(myModel);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     myTableView->update();
-    updateImage();
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
+    //updateImage();
     setConnexions();
 }
 
@@ -27,7 +29,8 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItem
     myTableView->setModel(model);
     myTableView->setSelectionModel(selectionModel);
     myTableView->update();
-    updateImage();
+    myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_ARGB32);
+    //updateImage();
     setConnexions();
 }
 
@@ -46,16 +49,21 @@ void ViewManager::updateSelection(const QItemSelection &selected){
 }
 
 void ViewManager::updateImage(){
-    /*
-    int rowCount = myModel->rowCount();
+    if (myImage == nullptr){
+        qDebug() << "myImage not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
+        return;
+    }
+    //qDebug() <<"image size :" << myImage->size() << Qt::endl;
     int columnCount = myModel->columnCount();
-    for (int r = 0; r < rowCount; r++){
-        for (int c = 0; c < columnCount; c++){
-           Cell *currentCell = (Cell*) myModel->item(c, r);
-           myImage->setPixelColor(c, r, currentCell->getColor());
+    int rowCount = myModel->rowCount();
+    for (int x = 0;  x < columnCount; x++){
+        for (int y = 0; y < rowCount; y++){
+           Cell *currentCell = (Cell*) myModel->item(y, x);
+           //qDebug() << "set Pixel Color : x =" << x <<", y ="<<y<<"color =" <<currentCell->getColor()<<Qt::endl;
+           myImage->setPixelColor(x, y, currentCell->getColor());
         }
     }
-    */
+
 }
 
 //getters

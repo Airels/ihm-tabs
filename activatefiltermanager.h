@@ -19,7 +19,8 @@
  *        either to show them in the ui or to fetch datas from them when the current filter is applied.
  * @author Eddy IKHLEF
  */
-class ActivateFilterManager : public QObject {
+class ActivateFilterManager : public QObject
+{
 public:
     /**
      * @brief Constructor of the class. Have to be linked with the followings parameters:
@@ -67,6 +68,7 @@ private:
     QVBoxLayout* _activeFilterLayout = nullptr;
     /**
      * @brief dataManager reference to the data manager used with the current opened file.
+     * @see DataManager.h
      */
     DataManager* dataManager;
     /**

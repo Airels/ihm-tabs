@@ -99,18 +99,16 @@ void MainWindow::actionCloseFile() {
 
 void MainWindow::actionSaveAs() {
     qDebug() << "[USER ACTION] Save As";
-    FileManager fileManager(this);
-    if(fileManager.saveFile(dataManager)) {
+    if(fileManager->saveFile(dataManager)) {
         qDebug() << "FILE SAVED";
     }
 }
 
 void MainWindow::actionExportAs() {
     qDebug() << "[USER ACTION] Export Image As";
-    FileManager fileManager(this);
     QPixmap* dummy = new QPixmap(100, 100);
     QImage image = dummy->toImage();
-    if(fileManager.saveImage(&image)) {
+    if(fileManager->saveImage(&image)) {
         qDebug() << "EXPORTED SUCCESSFULLY";
     }
 }

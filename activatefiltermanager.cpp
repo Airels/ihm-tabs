@@ -4,9 +4,8 @@
 #include "fixedcolordialog.h"
 #include "gradientcolordialog.h"
 
-ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, ViewManager* viewManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
+ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
-    this->viewManager = viewManager;
     this->_activeFilter = _activeFilter;
     this->_applyFilterBtn = _applyFilterBtn;
     this->gradientColorDialog =  new GradientColorDialog();

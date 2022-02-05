@@ -81,7 +81,7 @@ void MainWindow::actionOpenFile() {
     qDebug() << "[USER ACTION] Open File";
     if(dataManager != nullptr) dataManager = nullptr;
     if(fileManager->openFile(dataManager)) {
-        activateFilterManager = new ActivateFilterManager(dataManager, viewManager, ui->_activeFilter, ui->_applyFilterBtn);
+        activateFilterManager = new ActivateFilterManager(dataManager, ui->_activeFilter, ui->_applyFilterBtn);
         QStandardItemModel *model = dataManager->getCells();
         resetInterface();
         setEnabled(true);

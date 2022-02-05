@@ -68,7 +68,7 @@ private:
     QVBoxLayout* _activeFilterLayout = nullptr;
     /**
      * @brief dataManager reference to the data manager used with the current opened file.
-     * @see DataManager.h
+     * @see datamanager.h
      */
     DataManager* dataManager;
     /**

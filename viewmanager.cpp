@@ -34,6 +34,11 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItem
     setConnexions();
 }
 
+ViewManager::~ViewManager(){
+    //delete myModel;
+    //delete myTableView;
+    delete myImage;
+}
 
 
 void ViewManager::setConnexions(){

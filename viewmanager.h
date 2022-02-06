@@ -14,7 +14,7 @@ public:
     ViewManager(QTableView *tableView);
     ViewManager(QTableView *tableView, QStandardItemModel *model);
     ViewManager(QTableView *tableView, QStandardItemModel *model, QItemSelectionModel *selectionModel);
-    //~ViewManager();//TODO
+    ~ViewManager();//TODO
     QTableView *getTableView();
     QImage *getImage();
     void updateImage();

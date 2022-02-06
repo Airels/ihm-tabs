@@ -19,10 +19,25 @@ public:
      */
     explicit ModuloColorDialog(QWidget *parent = nullptr);
     ~ModuloColorDialog();
+    /**
+     * @brief getSelectedColor
+     * @return the selected color as a QColor.
+     * @author Eddy IKHLEF
+     */
     QColor getSelectedColor();
+    /**
+     * @brief getSelectedValue
+     * @return the selected integer value that correspond to the right side member of the modulo operand.
+     * @author Eddy IKHLEF
+     */
     int getSelectedValue();
 
 protected slots:
+    /**
+     * @brief colorChanged slot method called when the user interact with the elements that contains
+     *        color values for the color section in the ui.
+     * @author Eddy IKHLEF
+     */
     void colorChanged();
 };
 

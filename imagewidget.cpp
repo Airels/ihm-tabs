@@ -23,7 +23,12 @@ void ImageWidget::setImage(QImage *image) {
 }
 
 void ImageWidget::resizeEvent(QResizeEvent *pQEvent) {
+    reload();
+}
+
+void ImageWidget::reload() {
+    qDebug() << "Reload";
+
     QPixmap pixmap = QPixmap::fromImage(*image);
     label->setPixmap(pixmap.scaled(label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    qDebug() << "Resize";
 }

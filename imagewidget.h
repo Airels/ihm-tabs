@@ -13,6 +13,7 @@ private:
 public:
     explicit ImageWidget(QWidget *parent = nullptr);
     void setImage(QImage *image);
+    void reload();
 
 protected:
     virtual void resizeEvent(QResizeEvent *pQEvent);

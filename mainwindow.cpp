@@ -96,6 +96,7 @@ void MainWindow::actionOpenFile() {
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
         ui->_tableView->setModel(viewManager->getTableView()->model());
+        viewManager->updateImage();
         imageWidget->setImage(viewManager->getImage());
     }
 }
@@ -118,9 +119,8 @@ void MainWindow::actionSaveAs() {
 void MainWindow::actionExportAs() {
     qDebug() << "[USER ACTION] Export Image As";
     FileManager fileManager(this);
-    QPixmap* dummy = new QPixmap(100, 100);
-    QImage image = dummy->toImage();
-    if(fileManager.saveImage(&image)) {
+    viewManager->updateImage();
+    if(fileManager.saveImage(viewManager->getImage())) {
         qDebug() << "EXPORTED SUCCESSFULLY";
     }
 }
@@ -146,11 +146,10 @@ void MainWindow::applyFilter() {
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
 }
 
-#include <QImageReader>
-
 void MainWindow::currentTabUpdated(int index) {
     if (index != 1 || imageWidget == nullptr) return;
 
     viewManager->updateImage();
+    imageWidget->reload();
     // imageWidget->setImage(viewManager->getImage());
 }

@@ -126,9 +126,7 @@ void MainWindow::actionGenerate() {
 void MainWindow::actionSort() {
     qDebug() << "[USER ACTION] Sort ";
     if(viewManager == nullptr) return;
-    for(int i = 0; i<viewManager->getTableView()->model()->columnCount(); i++) {
-        viewManager->getTableView()->model()->sort(i, Qt::AscendingOrder);
-    }
+    qobject_cast<QStandardItemModel *>(viewManager->getTableView()->model())->sort(0, Qt::AscendingOrder);
 }
 
 void MainWindow::activateFilter() {

@@ -1,8 +1,6 @@
 #include "activatefiltermanager.h"
 #include <QCheckBox>
 #include <QLayoutItem>
-#include "fixedcolordialog.h"
-#include "gradientcolordialog.h"
 
 ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
@@ -12,6 +10,7 @@ ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox
     this->fixedColorDialog = new FixedColorDialog();
     this->conditionalColorDialog = new ConditionalColorDialog();
     this->moduloColorDialog = new ModuloColorDialog();
+    this->sortDialog = new SortDialog();
     createLayout();
 }
 
@@ -41,6 +40,8 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
         case 1:
             openFixedColor();
             break;
+        default:
+            break;
         }
         break;
     case 1:
@@ -51,7 +52,13 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
         case 1:
             openModuloColor();
             break;
+        case 2:
+            openSort();
+            break;
+        default: break;
         }
+        break;
+    default:
         break;
     }
 }
@@ -97,6 +104,11 @@ void ActivateFilterManager::openModuloColor() {
     updateSelection();
 }
 
+void ActivateFilterManager::openSort() {
+    this->_activeFilterLayout->addWidget(this->sortDialog);
+    updateSelection();
+}
+
 
 void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex) {
     qDebug() << "[USER ACTION] apply fixed color filter 2";
@@ -115,6 +127,8 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
                 QColor color = this->fixedColorDialog->getSelectedColor();
                 this->dataManager->apply_filter_fixed_color(*model, color);
             }
+            break;
+        default:
             break;
         }
         break;
@@ -136,7 +150,21 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
                 this->dataManager->apply_filter_modulo(*model, value, color);
             }
             break;
+        case 2: //Sort
+            if (this->moduloColorDialog != nullptr) {
+                int value = this->sortDialog->getSelectedValue();
+                if(value == 0) {
+                    this->dataManager->getCells()->sort(0, Qt::AscendingOrder);
+                } else {
+                    this->dataManager->getCells()->sort(0, Qt::DescendingOrder);
+                }
+            }
+            break;
+        default:
+            break;
         }
+        break;
+    default:
         break;
     }
 }

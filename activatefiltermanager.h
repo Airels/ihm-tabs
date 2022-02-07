@@ -6,6 +6,7 @@
 #include "fixedcolordialog.h"
 #include "gradientcolordialog.h"
 #include "modulocolordialog.h"
+#include "sortDialog.h"
 #include "viewmanager.h"
 #include <QApplication>
 #include <QWidget>
@@ -91,6 +92,10 @@ private:
      * @brief fixedColorDialog reference to a QDialog element for the "modulo color" filter.
      */
     ModuloColorDialog* moduloColorDialog = nullptr;
+    /**
+     * @brief sortDialog reference to a QDialog element for the "sort" filter.
+     */
+    SortDialog* sortDialog = nullptr;
 
     /**
      * @brief clearSelection will clear the active filter fields in the ui
@@ -129,6 +134,11 @@ private:
      * @author Eddy IKHLEF
      */
     void openModuloColor();
+    /**
+     * @brief openSort will showcase the corresponding filter in the ui using _activeFilter element.
+     * @author Eddy IKHLEF
+     */
+    void openSort();
 };
 
 #endif // ACTIVATEFILTERMANAGER_H

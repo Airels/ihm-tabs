@@ -1,4 +1,5 @@
 #include "sortdialog.h"
+#include <QDebug>
 
 SortDialog::SortDialog(QWidget *parent) :
     QDialog(parent)
@@ -7,5 +8,7 @@ SortDialog::SortDialog(QWidget *parent) :
 }
 
 int SortDialog::getSelectedValue() {
-    return _valueBox->currentIndex();
+    if(_buttonAscending->isChecked()) return 0;
+    else if(_buttonDescending->isChecked()) return 1;
+    return -1;
 }

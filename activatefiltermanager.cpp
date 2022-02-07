@@ -1,6 +1,7 @@
 #include "activatefiltermanager.h"
 #include <QCheckBox>
 #include <QLayoutItem>
+#include <QDebug>
 
 ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
@@ -151,11 +152,12 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
             }
             break;
         case 2: //Sort
-            if (this->moduloColorDialog != nullptr) {
+            if (this->sortDialog != nullptr) {
                 int value = this->sortDialog->getSelectedValue();
                 if(value == 0) {
+                    //todo find a way to fetch col value or else add a column selection to the filter
                     this->dataManager->getCells()->sort(0, Qt::AscendingOrder);
-                } else {
+                } else if(value == 1){
                     this->dataManager->getCells()->sort(0, Qt::DescendingOrder);
                 }
             }

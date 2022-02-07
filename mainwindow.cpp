@@ -39,9 +39,7 @@ void MainWindow::initAttributes() {
     _actionExportAs = ui->_menuFile->addAction("Export As Image");
     _actionGenerate = ui->_menuTools->addAction("Generate");
     ui->_menuTools->addSeparator();
-    _actionSort = ui->_menuTools->addAction("Sort");
 
-    _actionSort->setEnabled(false);
     _actionCloseFile->setEnabled(false);
     _actionSaveAs->setEnabled(false);
     _actionExportAs->setEnabled(false);
@@ -53,7 +51,6 @@ void MainWindow::initSignals() {
     connect(_actionSaveAs, SIGNAL(triggered()), this, SLOT(actionSaveAs()));
     connect(_actionExportAs, SIGNAL(triggered()), this, SLOT(actionExportAs()));
     connect(_actionGenerate, SIGNAL(triggered()), this, SLOT(actionGenerate()));
-    connect(_actionSort, SIGNAL(triggered()), this, SLOT(actionSort()));
     connect(ui->_treeFilter,SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(activateFilter()));
     connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
 }
@@ -74,10 +71,10 @@ void MainWindow::setEnabled(bool value) {
     ui->_tabWidget->setEnabled(value);
     ui->_activeFilter->setEnabled(value);
     ui->_treeFilter->setEnabled(value);
+    ui->_checkAll->setEnabled(value);
     _actionCloseFile->setEnabled(value);
     _actionSaveAs->setEnabled(value);
     _actionExportAs->setEnabled(value);
-    _actionSort->setEnabled(value);
     if(!value) ui->_applyFilterBtn->setEnabled(value);
 }
 
@@ -123,12 +120,6 @@ void MainWindow::actionGenerate() {
     qDebug() << "[USER ACTION] Generate";
 }
 
-void MainWindow::actionSort() {
-    qDebug() << "[USER ACTION] Sort ";
-    if(viewManager == nullptr) return;
-    qobject_cast<QStandardItemModel *>(viewManager->getTableView()->model())->sort(0, Qt::AscendingOrder);
-}
-
 void MainWindow::activateFilter() {
     if(ui->_treeFilter->currentItem()->childCount() > 0) return;
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
@@ -140,6 +131,7 @@ void MainWindow::activateFilter() {
 
 void MainWindow::applyFilter() {
     qDebug() << "[USER ACTION] button 'Apply' clicked";
+    if(ui->_checkAll->isChecked()) viewManager->getTableView()->selectAll();
     QModelIndexList model = viewManager->getTableView()->selectionModel()->selectedIndexes();
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();

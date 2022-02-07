@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QSpinBox>
 #include <QDialogButtonBox>
+#include <float.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -120,22 +121,30 @@ void MainWindow::actionGenerate() {
     QFormLayout form(&dialog);
     form.addRow(new QLabel("Please give following values:"));
     // Value1
-    QString value1 = QString("Number of rows: ");
+    QString rowStr = QString("Number of rows: ");
     QSpinBox *spinbox1 = new QSpinBox(&dialog);
-    form.addRow(value1, spinbox1);
+    spinbox1->setMaximum(INT_MAX);
+    spinbox1->setMinimum(0);
+    form.addRow(rowStr, spinbox1);
     // Value2
-    QString value2 = QString("Number of columns: ");
+    QString columnStr = QString("Number of columns: ");
     QSpinBox *spinbox2 = new QSpinBox(&dialog);
-    form.addRow(value2, spinbox2);
+    spinbox2->setMaximum(INT_MAX);
+    spinbox2->setMinimum(0);
+    form.addRow(columnStr, spinbox2);
 
     // Value 3
-    QString value3 = QString("Maximal value (not required): ");
-    QSpinBox *spinbox3 = new QSpinBox(&dialog);
-    form.addRow(value3, spinbox3);
+    QString maxValueStr = QString("Maximal value (not required): ");
+    QDoubleSpinBox *spinbox3 = new QDoubleSpinBox(&dialog);
+    spinbox3->setMaximum(DBL_MAX);
+    spinbox3->setMinimum(-DBL_MAX);
+    form.addRow(maxValueStr, spinbox3);
     // Value 4
-    QString value4 = QString("Minimal value (not required): ");
-    QSpinBox *spinbox4 = new QSpinBox(&dialog);
-    form.addRow(value4, spinbox4);
+    QString minValueStr = QString("Minimal value (not required): ");
+    QDoubleSpinBox *spinbox4 = new QDoubleSpinBox(&dialog);
+    spinbox4->setMaximum(DBL_MAX);
+    spinbox4->setMinimum(-DBL_MAX);
+    form.addRow(minValueStr, spinbox4);
     // Add Cancel and OK button
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
         Qt::Horizontal, &dialog);
@@ -146,7 +155,6 @@ void MainWindow::actionGenerate() {
     // Process when OK button is clicked
     if (dialog.exec() == QDialog::Accepted) {
         resetInterface();
-        QStandardItemModel model;
         int numberOfRows = (int) spinbox1->value();
         int numberOfColumns = (int) spinbox2->value();
         double maxValue = (double) spinbox3->value();
@@ -159,7 +167,10 @@ void MainWindow::actionGenerate() {
         }else{
             enable = dataManager->generateRandomValue(numberOfRows,numberOfColumns,minValue,maxValue,this);
         }
+        QStandardItemModel *model = dataManager->getCells();
         setEnabled(enable);
+        viewManager = new ViewManager(ui->_tableView, model);
+        ui->_tableView->setModel(viewManager->tableView()->model());
     }
 }
 

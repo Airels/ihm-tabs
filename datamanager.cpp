@@ -78,21 +78,19 @@ void DataManager::generateRandomValue(int row, int column){
         QList<QStandardItem *> items;
         for(int columnIndex = 0; columnIndex < column; columnIndex++){
 
-            //Cell *cell = (Cell *)(cells->item(rowIndex,columnIndex));
 
-            QRandomGenerator generator;
-            double value = generator.generateDouble() * DBL_MAX;
-            double sign = generator.generateDouble();
+            QRandomGenerator *generator = new QRandomGenerator(QRandomGenerator::securelySeeded());
+            double value = generator->generate();
+            double sign = generator->generateDouble();
+            qDebug() << value << sign;
             if(sign < 0.5){
-                //cell->setValue(-value);
                 items.append(new Cell(-value));
             }else{
-                //cell->setValue(value);
                 items.append(new Cell(value));
             }
-
         }
         cells->appendRow(items);
+
     }
 }
 
@@ -108,47 +106,33 @@ bool DataManager::generateRandomValue(int row, int column,double minValue, doubl
     cells->clear();
     cells->setColumnCount(column);
 
-    /*for(int i=0;i<column;i++){
-        items.append(new Cell(0));
-    }
-
-    cells->setColumnCount(column);
-
-    for(int i=0;i<row;i++){
-        cells->appendRow(items);
-    }
-    */
-
     for(int rowIndex = 0; rowIndex < row; rowIndex++){
         QList<QStandardItem *> items;
+
         for(int columnIndex = 0; columnIndex < column; columnIndex++){
 
-            //Cell *cell = (Cell *)(cells->item(rowIndex,columnIndex));
-            QRandomGenerator generator;
+            QRandomGenerator *generator = new QRandomGenerator(QRandomGenerator::securelySeeded());
             if(minValue >= 0 && maxValue >=0){
-                value = minValue + generator.generateDouble() * (maxValue - minValue);
-                //cell->setValue(value);
-                items.append(new Cell(-value));
+                value = minValue + generator->generateDouble() * (maxValue - minValue);
+                items.append(new Cell(value));
             }else if(minValue < 0 && maxValue >= 0){
                 double tempMinValue = minValue/4;
                 double tempMaxValue = maxValue/4;
                 double signValue = tempMaxValue /(tempMaxValue-tempMinValue); //probabilité d'etre positif on divise les Max/MinValue par 4 pour gérer le DBL_MAX/ DBL_MIN
-                double sign = generator.generateDouble();
+                double sign = generator->generateDouble();
                 if(sign >= signValue){
-                    value = generator.generateDouble()*minValue;
-                    //cell->setValue(-value);
-                    items.append(new Cell(-value));
+                    value = generator->generateDouble()*minValue;
+                    items.append(new Cell(value));
                 }else{
-                    value = generator.generateDouble()*maxValue;
-                    //cell->setValue(value);
+                    value = generator->generateDouble()*maxValue;
                     items.append(new Cell(value));
                 }
 
             }else if(minValue < 0 && maxValue < 0){
-                value = maxValue + generator.generateDouble() * (minValue - maxValue);
-                //cell->setValue(value);
+                value = maxValue + generator->generateDouble() * (minValue - maxValue);
                 items.append(new Cell(value));
             }
+            delete generator;
         }
         cells->appendRow(items);
     }

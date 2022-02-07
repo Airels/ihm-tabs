@@ -100,7 +100,7 @@ void DataManager::generateRandomValue(int row, int column){
     }
 }
 
-bool DataManager::generateRandomValue(int row, int column,int minValue, int maxValue, QWidget *parent){
+bool DataManager::generateRandomValue(int row, int column,double minValue, double maxValue, QWidget *parent){
     double value;
     if(minValue > maxValue){
         QMessageBox::warning(parent,"Error in values", "minimal value must be inferior or equal to the maximal value",QMessageBox::Ok);

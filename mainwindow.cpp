@@ -6,6 +6,11 @@
 #include <QObject>
 #include <QIcon>
 #include <QCheckBox>
+#include <QDialog>
+#include <QFormLayout>
+#include <QLabel>
+#include <QSpinBox>
+#include <QDialogButtonBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -111,6 +116,51 @@ void MainWindow::actionExportAs() {
 
 void MainWindow::actionGenerate() {
     qDebug() << "[USER ACTION] Generate";
+    QDialog dialog(this);
+    QFormLayout form(&dialog);
+    form.addRow(new QLabel("Please give following values:"));
+    // Value1
+    QString value1 = QString("Number of rows: ");
+    QSpinBox *spinbox1 = new QSpinBox(&dialog);
+    form.addRow(value1, spinbox1);
+    // Value2
+    QString value2 = QString("Number of columns: ");
+    QSpinBox *spinbox2 = new QSpinBox(&dialog);
+    form.addRow(value2, spinbox2);
+
+    // Value 3
+    QString value3 = QString("Maximal value (not required): ");
+    QSpinBox *spinbox3 = new QSpinBox(&dialog);
+    form.addRow(value3, spinbox3);
+    // Value 4
+    QString value4 = QString("Minimal value (not required): ");
+    QSpinBox *spinbox4 = new QSpinBox(&dialog);
+    form.addRow(value4, spinbox4);
+    // Add Cancel and OK button
+    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+        Qt::Horizontal, &dialog);
+    form.addRow(&buttonBox);
+    QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+    QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+    // Process when OK button is clicked
+    if (dialog.exec() == QDialog::Accepted) {
+        resetInterface();
+        QStandardItemModel model;
+        int numberOfRows = (int) spinbox1->value();
+        int numberOfColumns = (int) spinbox2->value();
+        double maxValue = (double) spinbox3->value();
+        double minValue = (double) spinbox4->value();
+        bool enable = true;
+        qDebug() << "[values]" << numberOfRows << numberOfColumns << maxValue << minValue;
+        dataManager = new DataManager();
+        if(maxValue == 0 && minValue == 0 ){
+            dataManager->generateRandomValue(numberOfRows,numberOfColumns);
+        }else{
+            enable = dataManager->generateRandomValue(numberOfRows,numberOfColumns,minValue,maxValue,this);
+        }
+        setEnabled(enable);
+    }
 }
 
 void MainWindow::activateFilter() {

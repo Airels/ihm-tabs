@@ -70,6 +70,10 @@ private:
      * @brief _actionGenerate reference to the corresponding attribute of the ui.
      */
     QAction* _actionGenerate;
+    /**
+     * @brief _actionSort reference to the corresponding attribute of the ui.
+     */
+    QAction* _actionSort;
 
     /**
      * @brief initAttributes will initialize the class' attributes. It must be called in the class constructor.
@@ -117,10 +121,15 @@ protected slots:
      */
     void actionExportAs();
     /**
-     * @brief actionSaveAs slot method called when the user interact with the action "Generate" in the main menu.
+     * @brief actionGenerate slot method called when the user interact with the action "Generate" in the main menu.
      * @author Eddy IKHLEF
      */
     void actionGenerate();
+    /**
+     * @brief actionSort slot method called when the user interact with the action "Sort" in the main menu.
+     * @author Eddy IKHLEF
+     */
+    void actionSort();
     /**
      * @brief activateFilter slot method called when the user interact with the filter selection menu in the ui.
      * It will load the selected filter into the ui.

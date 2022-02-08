@@ -31,19 +31,19 @@ GenerateDialog::GenerateDialog(QWidget *parent) :
     form->addRow(columnStr, nbOfColsBox);
 
     // Value 3
-    QString maxValueStr = QString("Maximal value (not required): ");
-    minValueBox = new QDoubleSpinBox(this);
-    minValueBox->setMaximum(DBL_MAX);
-    minValueBox->setMinimum(-DBL_MAX);
-    minValueBox->setAlignment(Qt::AlignRight);
-    form->addRow(maxValueStr, minValueBox);
-    // Value 4
     QString minValueStr = QString("Minimal value (not required): ");
     maxValueBox = new QDoubleSpinBox(this);
     maxValueBox->setMaximum(DBL_MAX);
     maxValueBox->setMinimum(-DBL_MAX);
     maxValueBox->setAlignment(Qt::AlignRight);
     form->addRow(minValueStr, maxValueBox);
+    // Value 4
+    QString maxValueStr = QString("Maximal value (not required): ");
+    minValueBox = new QDoubleSpinBox(this);
+    minValueBox->setMaximum(DBL_MAX);
+    minValueBox->setMinimum(-DBL_MAX);
+    minValueBox->setAlignment(Qt::AlignRight);
+    form->addRow(maxValueStr, minValueBox);
     // Add Cancel and OK button
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,Qt::Horizontal, this);
     form->addRow(buttonBox);

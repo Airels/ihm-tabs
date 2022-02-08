@@ -21,6 +21,11 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
     myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_RGB32);
     //updateImage();
     setConnexions();
+    for (int i = 0; i < model->rowCount(); i++) {
+        for (int j = 0; j < model->columnCount(); j++) {
+            model->item(i, j)->setData(int(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+        }
+    }
 }
 
 ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItemSelectionModel *selectionModel)

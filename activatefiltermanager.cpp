@@ -38,11 +38,17 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
     switch(categoryIndex) {
     case 0:
         switch(toolIndex) {
-        case 0:
+        case 0: //Gradient
             openGradientColor();
             break;
-        case 1:
+        case 1: //Fixed
             openFixedColor();
+            break;
+        case 2: //Conditional
+            openConditionalColor();
+            break;
+        case 3: //Modulo
+            openModuloColor();
             break;
         default:
             break;
@@ -50,13 +56,7 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
         break;
     case 1:
         switch(toolIndex) {
-        case 0:
-            openConditionalColor();
-            break;
-        case 1:
-            openModuloColor();
-            break;
-        case 2:
+        case 0: //Sort
             openSort();
             break;
         default: break;
@@ -135,13 +135,7 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
                 this->dataManager->apply_filter_fixed_color(*model, color);
             }
             break;
-        default:
-            break;
-        }
-        break;
-    case 1:
-        switch(toolIndex) {
-        case 0: //Condition
+        case 2: //Condition
             if (this->conditionalColorDialog != nullptr) {
                 QColor colorMin = this->conditionalColorDialog->getSelectedColorMin();
                 QColor colorEqual = this->conditionalColorDialog->getSelectedColorEqual();
@@ -150,14 +144,20 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
                 this->dataManager->apply_filter_simplified_condition(*model, value, colorMin, colorEqual, colorMax);
             }
             break;
-        case 1: //Modulo
+        case 3: //Modulo
             if (this->moduloColorDialog != nullptr) {
                 QColor color = this->moduloColorDialog->getSelectedColor();
                 int value = this->moduloColorDialog->getSelectedValue();
                 this->dataManager->apply_filter_modulo(*model, value, color);
             }
             break;
-        case 2: //Sort
+        default:
+            break;
+        }
+        break;
+    case 1:
+        switch(toolIndex) {
+        case 0: //Sort
             if (this->sortDialog != nullptr) {
                 int value = this->sortDialog->getSelectedValue();
                 if(value == 0) {

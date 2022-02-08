@@ -207,14 +207,6 @@
              <string>Fixed</string>
             </property>
            </item>
-          </item>
-          <item>
-           <property name="text">
-            <string>Miscellaneous</string>
-           </property>
-           <property name="flags">
-            <set>ItemIsEnabled</set>
-           </property>
            <item>
             <property name="text">
              <string>Conditionnal</string>
@@ -225,6 +217,14 @@
              <string>Modulo</string>
             </property>
            </item>
+          </item>
+          <item>
+           <property name="text">
+            <string>Miscellaneous</string>
+           </property>
+           <property name="flags">
+            <set>ItemIsEnabled</set>
+           </property>
            <item>
             <property name="text">
              <string>Sort</string>
@@ -284,7 +284,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>130</width>
               <height>0</height>
              </size>
             </property>
@@ -317,7 +317,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="defaultUp">

@@ -142,7 +142,7 @@ bool FileManager::saveImage(const QImage *image) {
 
     qDebug() << filename;
 
-    if (filename.endsWith(".svg") && false) { // TODO: A test sans cela pour les svg d'abord
+    if (filename.endsWith(".svg") && true) { // TODO: A test sans cela pour les svg d'abord
         QPixmap pixmap = QPixmap::fromImage(*image);
         if (!pixmap.save(filename, "SVG")) {
             QString msg = "An error occured while saving data as image.";

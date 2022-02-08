@@ -9,7 +9,7 @@
 GenerateDialog::GenerateDialog(QWidget *parent) :
     QDialog(parent)
 {
-    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setupUi(this);
     this->setWindowIcon(QIcon(":/icon.png"));
     QFormLayout* form = new QFormLayout();

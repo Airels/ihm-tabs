@@ -117,8 +117,7 @@ void MainWindow::actionCloseFile() {
 
 void MainWindow::actionSaveAs() {
     qDebug() << "[USER ACTION] Save As";
-    FileManager fileManager(this);
-    if(fileManager.saveFile(dataManager)) {
+    if(fileManager->saveFile(dataManager)) {
         qDebug() << "FILE SAVED";
     }
 }

@@ -40,7 +40,7 @@
    <widget class="QWidget" name="scrollAreaWidgetContents_6">
     <property name="geometry">
      <rect>
-      <x>-2</x>
+      <x>0</x>
       <y>0</y>
       <width>200</width>
       <height>500</height>
@@ -86,7 +86,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -960,5 +960,150 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_hueSlider_min</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_hueValue_min</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>71</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_saturationSlider_min</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_saturationValue_min</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_valueSlider_min</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_valueValue_min</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_hueSlider_equal</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_hueValue_equal</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>139</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_saturationSlider_equal</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_saturationValue_equal</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_valueSlider_equal</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_valueValue_equal</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_hueSlider_max</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_hueValue_max</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_saturationSlider_max</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_saturationValue_max</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>124</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_valueSlider_max</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_valueValue_max</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>142</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

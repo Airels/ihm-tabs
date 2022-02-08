@@ -31,7 +31,7 @@ public:
      * @brief acceptedSaveImageTypes A QString who dictates what types of images could be used to save pixel-representation of input data
      * @author VIZCAINO Yohan
      */
-    const QString acceptedSaveImageTypes = "Bitmap Image (*.bmp);;PNG Image (*.png);;JPG Image (*.jpg);;SVG Image (*.svg)";
+    const QString acceptedSaveImageTypes = "Bitmap Image (*.bmp);;PNG Image (*.png);;JPG Image (*.jpg)";
 
 
     /**

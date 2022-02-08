@@ -6,7 +6,7 @@
 #include "fixedcolordialog.h"
 #include "gradientcolordialog.h"
 #include "modulocolordialog.h"
-#include "sortDialog.h"
+#include "sortdialog.h"
 #include "viewmanager.h"
 #include <QApplication>
 #include <QWidget>

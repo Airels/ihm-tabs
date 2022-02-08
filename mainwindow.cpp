@@ -42,14 +42,13 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initAttributes() {
-    dataManager = nullptr;
-    fileManager = new FileManager(this);
-    activateFilterManager = nullptr;
+    qDebug() << "init attributes" << Qt::endl;
+
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
     ui->_menuFile->addSeparator();
-    _actionSaveAs = ui->_menuFile->addAction("Save As Itabs");
+    _actionSaveAs = ui->_menuFile->addAction("Save As ITabs");
     _actionExportAs = ui->_menuFile->addAction("Export As Image");
     _actionGenerate = ui->_menuTools->addAction("Generate");
     ui->_menuTools->addSeparator();
@@ -104,6 +103,8 @@ void MainWindow::actionOpenFile() {
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
         ui->_tableView->setModel(viewManager->getTableView()->model());
+        viewManager->updateImage();
+        imageWidget->setImage(viewManager->getImage());
     }
 }
 
@@ -116,16 +117,17 @@ void MainWindow::actionCloseFile() {
 
 void MainWindow::actionSaveAs() {
     qDebug() << "[USER ACTION] Save As";
-    if(fileManager->saveFile(dataManager)) {
+    FileManager fileManager(this);
+    if(fileManager.saveFile(dataManager)) {
         qDebug() << "FILE SAVED";
     }
 }
 
 void MainWindow::actionExportAs() {
     qDebug() << "[USER ACTION] Export Image As";
-    QPixmap* dummy = new QPixmap(100, 100);
-    QImage image = dummy->toImage();
-    if(fileManager->saveImage(&image)) {
+    FileManager fileManager(this);
+    viewManager->updateImage();
+    if(fileManager.saveImage(viewManager->getImage())) {
         qDebug() << "EXPORTED SUCCESSFULLY";
     }
 }
@@ -206,4 +208,12 @@ void MainWindow::applyFilter() {
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
+}
+
+void MainWindow::currentTabUpdated(int index) {
+    if (index != 1 || imageWidget == nullptr) return;
+
+    viewManager->updateImage();
+    imageWidget->reload();
+    // imageWidget->setImage(viewManager->getImage());
 }

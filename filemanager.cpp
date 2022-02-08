@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QTextStream>
 #include <QtXml>
+#include <QPixmap>
 
 FileManager::FileManager(QWidget * attachedWidget)
 {
@@ -141,11 +142,20 @@ bool FileManager::saveImage(const QImage *image) {
 
     qDebug() << filename;
 
-    if (!image->save(filename)) {
-        QString msg = "An error occured while saving data as image.";
-        QMessageBox::warning(attachedWidget, "Save as image failed", msg, QMessageBox::Ok);
-        return false;
-    } else return true;
+    if (filename.endsWith(".svg") && false) { // TODO: A test sans cela pour les svg d'abord
+        QPixmap pixmap = QPixmap::fromImage(*image);
+        if (!pixmap.save(filename, "SVG")) {
+            QString msg = "An error occured while saving data as image.";
+            QMessageBox::warning(attachedWidget, "Save as image failed", msg, QMessageBox::Ok);
+            return false;
+        } else return true;
+    } else {
+        if (!image->save(filename)) {
+            QString msg = "An error occured while saving data as image.";
+            QMessageBox::warning(attachedWidget, "Save as image failed", msg, QMessageBox::Ok);
+            return false;
+        } else return true;
+    }
 }
 
 bool FileManager::parseCSVFile(QFile &file, QStandardItemModel * data) {

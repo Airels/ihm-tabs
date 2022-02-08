@@ -79,4 +79,3 @@ QTableView *ViewManager::getTableView(){
 QImage *ViewManager::getImage(){
     return myImage;
 }
-

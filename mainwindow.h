@@ -6,6 +6,7 @@
 #include "datamanager.h"
 #include "filemanager.h"
 #include "activatefiltermanager.h"
+#include "imagewidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -72,6 +73,11 @@ private:
     QAction* _actionGenerate;
 
     /**
+     * @brief imageWidget pointer to the imager-viewer widget
+     */
+    ImageWidget *imageWidget = nullptr;
+
+    /**
      * @brief initAttributes will initialize the class' attributes. It must be called in the class constructor.
      * @author Eddy IKHLEF
      */
@@ -133,5 +139,7 @@ protected slots:
      * @author Eddy IKHLEF
      */
     void applyFilter();
+    void currentTabUpdated(int index);
+
 };
 #endif // MAINWINDOW_H

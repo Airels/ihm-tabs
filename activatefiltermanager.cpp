@@ -2,6 +2,8 @@
 #include <QCheckBox>
 #include <QLayoutItem>
 #include <QDebug>
+#include "fixedcolordialog.h"
+#include "gradientcolordialog.h"
 
 ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
@@ -21,6 +23,7 @@ ActivateFilterManager::~ActivateFilterManager() {
     delete this->fixedColorDialog;
     delete this->conditionalColorDialog;
     delete this->moduloColorDialog;
+    delete this->sortDialog;
 }
 
 void ActivateFilterManager::createLayout() {

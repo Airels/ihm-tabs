@@ -41,8 +41,8 @@ void MainWindow::initAttributes() {
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
     _actionCloseFile = ui->_menuFile->addAction("Close File");
-    ui->_menuFile->addSeparator();
     _actionSaveAs = ui->_menuFile->addAction("Save As ITabs");
+    ui->_menuFile->addSeparator();
     _actionExportAs = ui->_menuFile->addAction("Export As Image");
     _actionGenerate = ui->_menuTools->addAction("Generate");
     ui->_menuTools->addSeparator();

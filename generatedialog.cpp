@@ -19,14 +19,14 @@ GenerateDialog::GenerateDialog(QWidget *parent) :
     QString rowStr = QString("Number of rows: ");
     nbOfRowsBox = new QSpinBox(this);
     nbOfRowsBox->setMaximum(INT_MAX);
-    nbOfRowsBox->setMinimum(0);
+    nbOfRowsBox->setMinimum(1);
     nbOfRowsBox->setAlignment(Qt::AlignRight);
     form->addRow(rowStr, nbOfRowsBox);
     // Value2
     QString columnStr = QString("Number of columns: ");
     nbOfColsBox = new QSpinBox(this);
     nbOfColsBox->setMaximum(INT_MAX);
-    nbOfColsBox->setMinimum(0);
+    nbOfColsBox->setMinimum(1);
     nbOfColsBox->setAlignment(Qt::AlignRight);
     form->addRow(columnStr, nbOfColsBox);
 

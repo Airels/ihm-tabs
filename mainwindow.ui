@@ -317,7 +317,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -387,22 +387,6 @@
     <hint type="destinationlabel">
      <x>1165</x>
      <y>0</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_tabWidget</sender>
-   <signal>currentChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>currentTabUpdated(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>317</x>
-     <y>69</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>446</x>
-     <y>37</y>
     </hint>
    </hints>
   </connection>

@@ -167,12 +167,6 @@ void MainWindow::applyFilter() {
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
-}
-
-void MainWindow::currentTabUpdated(int index) {
-    if (index != 1 || imageWidget == nullptr) return;
-
     viewManager->updateImage();
     imageWidget->reload();
-    // imageWidget->setImage(viewManager->getImage());
 }

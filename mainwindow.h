@@ -139,7 +139,6 @@ protected slots:
      * @author IKHLEF Eddy
      */
     void applyFilter();
-    void currentTabUpdated(int index);
 
 };
 #endif // MAINWINDOW_H

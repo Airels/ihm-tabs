@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FixedColorDialog</class>
- <widget class="QDialog" name="FixedColorDialog">
+ <class>ModuloColorDialog</class>
+ <widget class="QDialog" name="ModuloColorDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -80,26 +80,22 @@
          <number>0</number>
         </property>
         <item row="0" column="0">
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Hue</string>
+           <string>Modulo Value</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Saturation</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout">
+        <item row="8" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <property name="spacing">
            <number>0</number>
           </property>
+          <property name="bottomMargin">
+           <number>7</number>
+          </property>
           <item>
-           <widget class="QSlider" name="_hueSlider">
+           <widget class="QSlider" name="_valueSlider">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -113,7 +109,7 @@
              </size>
             </property>
             <property name="maximum">
-             <number>360</number>
+             <number>255</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -121,7 +117,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="_hueValue">
+           <widget class="QLabel" name="_valueValue">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -141,7 +137,14 @@
           </item>
          </layout>
         </item>
-        <item row="3" column="0">
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Saturation</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="spacing">
            <number>0</number>
@@ -190,13 +193,54 @@
          </layout>
         </item>
         <item row="4" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Value</string>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
           </property>
-         </widget>
+          <item>
+           <widget class="QSlider" name="_hueSlider">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>75</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <number>360</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="_hueValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>40</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="6" column="0">
+        <item row="9" column="0">
          <widget class="QFrame" name="_colorFrame">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -227,54 +271,53 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="spacing">
-           <number>0</number>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Value</string>
           </property>
-          <property name="bottomMargin">
-           <number>7</number>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Hue</string>
           </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QSlider" name="_valueSlider">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+           <widget class="QSpinBox" name="_moduloBox">
             <property name="maximumSize">
              <size>
-              <width>75</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
-            <property name="maximum">
-             <number>255</number>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+            <property name="minimum">
+             <number>1</number>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="_valueValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="maximumSize">
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
-              <height>16777215</height>
+              <width>30</width>
+              <height>20</height>
              </size>
             </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
+           </spacer>
           </item>
          </layout>
         </item>

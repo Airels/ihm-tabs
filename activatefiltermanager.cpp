@@ -1,20 +1,32 @@
 #include "activatefiltermanager.h"
 #include <QCheckBox>
 #include <QLayoutItem>
-#include "fixedcolordialog.h"
+#include <QDebug>
 
-ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, ViewManager* viewManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
+ActivateFilterManager::ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn ) {
     this->dataManager = dataManager;
-    this->viewManager = viewManager;
     this->_activeFilter = _activeFilter;
     this->_applyFilterBtn = _applyFilterBtn;
-    this->_activeFilterLayout = new QVBoxLayout;
-    this->_activeFilterLayout->setSpacing(0);
-    this->_activeFilterLayout->setMargin(0);
+    this->gradientColorDialog =  new GradientColorDialog();
+    this->fixedColorDialog = new FixedColorDialog();
+    this->conditionalColorDialog = new ConditionalColorDialog();
+    this->moduloColorDialog = new ModuloColorDialog();
+    this->sortDialog = new SortDialog();
+    createLayout();
 }
 
 ActivateFilterManager::~ActivateFilterManager() {
     delete this->name;
+    delete this->gradientColorDialog;
+    delete this->fixedColorDialog;
+    delete this->conditionalColorDialog;
+    delete this->moduloColorDialog;
+}
+
+void ActivateFilterManager::createLayout() {
+    this->_activeFilterLayout = new QVBoxLayout;
+    this->_activeFilterLayout->setSpacing(0);
+    this->_activeFilterLayout->setMargin(0);
 }
 
 void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
@@ -24,13 +36,30 @@ void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
     case 0:
         switch(toolIndex) {
         case 0:
+            openGradientColor();
             break;
         case 1:
             openFixedColor();
             break;
+        default:
+            break;
         }
         break;
     case 1:
+        switch(toolIndex) {
+        case 0:
+            openConditionalColor();
+            break;
+        case 1:
+            openModuloColor();
+            break;
+        case 2:
+            openSort();
+            break;
+        default: break;
+        }
+        break;
+    default:
         break;
     }
 }
@@ -41,9 +70,9 @@ void ActivateFilterManager::clearSelection() {
     disconnect(this->_applyFilterBtn, SIGNAL(clicked()));
     QLayoutItem* child;
     while ((child = this->_activeFilterLayout->takeAt(0)) != nullptr) {
-        delete child->widget();
-        delete child;
+        child->widget()->setParent(nullptr);
     }
+    this->_activeFilter->setLayout(_activeFilterLayout);
 }
 
 void ActivateFilterManager::updateSelection() {
@@ -53,14 +82,34 @@ void ActivateFilterManager::updateSelection() {
 }
 
 void ActivateFilterManager::setFilterName(QString name) {
+    qDebug() << name;
+    qDebug() << &name;
+    qDebug() << this->name;
     this->name = &name;
 }
 
 void ActivateFilterManager::openFixedColor() {
-    //QColorDialog will work fine
-    this->_activeFilter->setLayout(_activeFilterLayout);
-    FixedColorDialog* dialog = new FixedColorDialog();
-    this->_activeFilterLayout->addWidget(dialog);
+    this->_activeFilterLayout->addWidget(this->fixedColorDialog);
+    updateSelection();
+}
+
+void ActivateFilterManager::openGradientColor() {
+    this->_activeFilterLayout->addWidget(this->gradientColorDialog);
+    updateSelection();
+}
+
+void ActivateFilterManager::openConditionalColor() {
+    this->_activeFilterLayout->addWidget(this->conditionalColorDialog);
+    updateSelection();
+}
+
+void ActivateFilterManager::openModuloColor() {
+    this->_activeFilterLayout->addWidget(this->moduloColorDialog);
+    updateSelection();
+}
+
+void ActivateFilterManager::openSort() {
+    this->_activeFilterLayout->addWidget(this->sortDialog);
     updateSelection();
 }
 
@@ -71,18 +120,56 @@ void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryInde
     case 0:
         switch(toolIndex) {
         case 0: //Gradient Color
+            if (this->gradientColorDialog != nullptr) {
+                QColor colorMin = this->gradientColorDialog->getSelectedColorMin();
+                QColor colorMax = this->gradientColorDialog->getSelectedColorMax();
+                this->dataManager->apply_filter_min_max(*model, colorMin, colorMax);
+            }
             break;
         case 1: //Fixed Color
-            QLayoutItem* child;
-            if ((child = this->_activeFilterLayout->itemAt(0)) != nullptr) {
-                FixedColorDialog* dialog = (FixedColorDialog*) child->widget();
-                QColor color = dialog->getSelectedColor();
+            if (this->fixedColorDialog != nullptr) {
+                QColor color = this->fixedColorDialog->getSelectedColor();
                 this->dataManager->apply_filter_fixed_color(*model, color);
             }
+            break;
+        default:
             break;
         }
         break;
     case 1:
+        switch(toolIndex) {
+        case 0: //Condition
+            if (this->conditionalColorDialog != nullptr) {
+                QColor colorMin = this->conditionalColorDialog->getSelectedColorMin();
+                QColor colorEqual = this->conditionalColorDialog->getSelectedColorEqual();
+                QColor colorMax = this->conditionalColorDialog->getSelectedColorMax();
+                int value = this->conditionalColorDialog->getSelectedValue();
+                this->dataManager->apply_filter_simplified_condition(*model, value, colorMin, colorEqual, colorMax);
+            }
+            break;
+        case 1: //Modulo
+            if (this->moduloColorDialog != nullptr) {
+                QColor color = this->moduloColorDialog->getSelectedColor();
+                int value = this->moduloColorDialog->getSelectedValue();
+                this->dataManager->apply_filter_modulo(*model, value, color);
+            }
+            break;
+        case 2: //Sort
+            if (this->sortDialog != nullptr) {
+                int value = this->sortDialog->getSelectedValue();
+                if(value == 0) {
+                    //todo find a way to fetch col value or else add a column selection to the filter
+                    this->dataManager->getCells()->sort(0, Qt::AscendingOrder);
+                } else if(value == 1){
+                    this->dataManager->getCells()->sort(0, Qt::DescendingOrder);
+                }
+            }
+            break;
+        default:
+            break;
+        }
+        break;
+    default:
         break;
     }
 }

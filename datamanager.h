@@ -19,6 +19,7 @@ public:
     void set(Cell *cell, int row, int column);
     QStandardItemModel * getCells();
     void generateRandomValue(int row, int column);
+    bool generateRandomValue(int row, int column,double minValue, double maxValue,QWidget *parent);
     void apply_filter_fixed_color(QModelIndexList indexList, QColor color);
     void apply_filter_min_max(QModelIndexList indexList, QColor gradientMin, QColor gradientMax);
     void apply_filter_simplified_condition(QModelIndexList indexList, double value, QColor underColor, QColor equalColor, QColor aboveColor);

@@ -96,8 +96,6 @@ void MainWindow::actionOpenFile() {
         resetInterface();
         setEnabled(true);
         viewManager = new ViewManager(ui->_tableView, model);
-        ui->_tableView->setModel(viewManager->getTableView()->model());
-        viewManager->updateImage();
         imageWidget->setImage(viewManager->getImage());
     }
 }
@@ -147,7 +145,7 @@ void MainWindow::actionGenerate() {
         setEnabled(enable);
         activateFilterManager = new ActivateFilterManager(dataManager, ui->_activeFilter, ui->_applyFilterBtn);
         viewManager = new ViewManager(ui->_tableView, model);
-        ui->_tableView->setModel(viewManager->getTableView()->model());
+        imageWidget->setImage(viewManager->getImage());
     }
 }
 

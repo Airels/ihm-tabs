@@ -27,7 +27,6 @@ SOURCES += \
     modulofilter.cpp \
     simplifiedconditionfilter.cpp \
     sortdialog.cpp \
-    tablewidget.cpp \
     viewmanager.cpp
 
 HEADERS += \
@@ -48,7 +47,6 @@ HEADERS += \
     modulofilter.h \
     simplifiedconditionfilter.h \
     sortdialog.h \
-    tablewidget.h \
     viewmanager.h
 
 FORMS += \
@@ -59,8 +57,7 @@ FORMS += \
     imagewidget.ui \
     mainwindow.ui \
     modulocolordialog.ui \
-    sortdialog.ui \
-    tablewidget.ui
+    sortdialog.ui
 
 RESOURCES += resources.qrc
 

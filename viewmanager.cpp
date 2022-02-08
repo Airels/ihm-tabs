@@ -1,11 +1,14 @@
 #include "viewmanager.h"
 #include "cell.h"
 #include <QDebug>
+#include <QHeaderView>
 
 
 ViewManager::ViewManager(QTableView *tableView){
      myTableView = tableView;
      myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+     //myTableView->setSortingEnabled(true);
+     myTableView->horizontalHeader()->setSortIndicatorShown(true);
      myTableView->update();
      myImage = nullptr;
      setConnexions();
@@ -17,6 +20,8 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model)
     myModel = model;
     myTableView->setModel(myModel);
     myTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    //myTableView->setSortingEnabled(true);
+    myTableView->horizontalHeader()->setSortIndicatorShown(true);
     myTableView->update();
     myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_RGB32);
     //updateImage();
@@ -33,6 +38,8 @@ ViewManager::ViewManager(QTableView *tableView, QStandardItemModel *model, QItem
     myTableView = tableView;
     myTableView->setModel(model);
     myTableView->setSelectionModel(selectionModel);
+    //myTableView->setSortingEnabled(true);
+    myTableView->horizontalHeader()->setSortIndicatorShown(true);
     myTableView->update();
     myImage = new QImage(myModel->columnCount(), myModel->rowCount(), QImage::Format_RGB32);
     //updateImage();

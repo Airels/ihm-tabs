@@ -61,9 +61,9 @@ int GenerateDialog::getNumberOfCols() {
 }
 
 double GenerateDialog::getMinValue() {
-    return (int) minValueBox->value();
+    return minValueBox->value();
 }
 
 double GenerateDialog::getMaxValue() {
-    return (int) maxValueBox->value();
+    return maxValueBox->value();
 }

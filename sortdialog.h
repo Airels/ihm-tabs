@@ -5,7 +5,7 @@
 
 /**
  * @brief The SortDialog class is the one in charge of the QDialog to handle the sort filter.
- * @author Eddy IKHLEF
+ * @author IKHLEF Eddy
  */
 class SortDialog : public QDialog, private Ui::SortDialog
 {
@@ -14,14 +14,14 @@ class SortDialog : public QDialog, private Ui::SortDialog
 public:
     /**
      * @brief Constructor of the class. Have to be linked with the followings parameters:
-     * @param parent it's parent QWidget.
-     * @author Eddy IKHLEF
+     * @param parent its parent QWidget.
+     * @author IKHLEF Eddy
      */
     explicit SortDialog(QWidget *parent = nullptr);
     /**
      * @brief getSelectedValue
      * @return the selected integer value that correspond to the way to sort the selected column.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     int getSelectedValue();
 };

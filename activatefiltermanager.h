@@ -18,7 +18,7 @@
 /**
  * @brief The ActivateFilterManager class is in charge of instantiating the QDialog of the implemented filters and to use them,
  *        either to show them in the ui or to fetch datas from them when the current filter is applied.
- * @author Eddy IKHLEF
+ * @author IKHLEF Eddy
  */
 class ActivateFilterManager : public QObject
 {
@@ -28,7 +28,7 @@ public:
      * @param dataManager to apply the filters on the current data.
      * @param _activeFilter to append and remove the selected filter to the current groupBox in the ui.
      * @param _applyFilterBtn for a safety measure to be able to disable or enable the apply filter button.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     ActivateFilterManager(DataManager* dataManager, QGroupBox* _activeFilter, QPushButton* _applyFilterBtn);
     ~ActivateFilterManager();
@@ -36,13 +36,13 @@ public:
      * @brief handle the current filter to call.
      * @param categoryIndex of the selected filter.
      * @param toolIndex of the selected filter.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void handle(int categoryIndex, int toolIndex);
     /**
      * @brief setFilterName allows to change the labelled name of the given groupBox.
      * @param name
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void setFilterName(QString name);
     /**
@@ -50,7 +50,7 @@ public:
      * @param model
      * @param categoryIndex of the selected filter.
      * @param toolIndex of the selected filter.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex);
 
@@ -100,43 +100,43 @@ private:
     /**
      * @brief clearSelection will clear the active filter fields in the ui
      *                      (i.e. the filer's box name and the elements of the previously active will be removed).
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void clearSelection();
     /**
      * @brief updateSelection will update the active filter fields in the ui
      *        (i.e. the box name will be updated).
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void updateSelection();
     /**
      * @brief createLayout will instanciates the current layout of the filter's box.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void createLayout();
     /**
      * @brief openFixedColor will showcase the corresponding filter in the ui using _activeFilter element.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void openFixedColor();
     /**
      * @brief openGradientColor will showcase the corresponding filter in the ui using _activeFilter element.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void openGradientColor();
     /**
      * @brief openConditionalColor will showcase the corresponding filter in the ui using _activeFilter element.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void openConditionalColor();
     /**
      * @brief openModuloColor will showcase the corresponding filter in the ui using _activeFilter element.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void openModuloColor();
     /**
      * @brief openSort will showcase the corresponding filter in the ui using _activeFilter element.
-     * @author Eddy IKHLEF
+     * @author IKHLEF Eddy
      */
     void openSort();
 };

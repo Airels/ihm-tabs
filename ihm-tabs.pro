@@ -17,6 +17,7 @@ SOURCES += \
     filter.cpp \
     fixedcolordialog.cpp \
     fixedcolorfilter.cpp \
+    generatedialog.cpp \
     gradientcolordialog.cpp \
     imagewidget.cpp \
     main.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     filter.h \
     fixedcolordialog.h \
     fixedcolorfilter.h \
+    generatedialog.h \
     gradientcolordialog.h \
     imagewidget.h \
     mainwindow.h \
@@ -52,6 +54,7 @@ HEADERS += \
 FORMS += \
     conditionalcolordialog.ui \
     fixedcolordialog.ui \
+    generatedialog.ui \
     gradientcolordialog.ui \
     imagewidget.ui \
     mainwindow.ui \

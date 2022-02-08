@@ -2,16 +2,10 @@
 #include "ui_mainwindow.h"
 #include "filemanager.h"
 #include "activatefiltermanager.h"
+#include "generatedialog.h"
 #include <QDebug>
 #include <QObject>
 #include <QIcon>
-#include <QCheckBox>
-#include <QDialog>
-#include <QFormLayout>
-#include <QLabel>
-#include <QSpinBox>
-#include <QDialogButtonBox>
-#include <float.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -133,48 +127,14 @@ void MainWindow::actionExportAs() {
 
 void MainWindow::actionGenerate() {
     qDebug() << "[USER ACTION] Generate";
-    QDialog dialog(this);
-    QFormLayout form(&dialog);
-    form.addRow(new QLabel("Please give following values:"));
-    // Value1
-    QString rowStr = QString("Number of rows: ");
-    QSpinBox *spinbox1 = new QSpinBox(&dialog);
-    spinbox1->setMaximum(INT_MAX);
-    spinbox1->setMinimum(0);
-    form.addRow(rowStr, spinbox1);
-    // Value2
-    QString columnStr = QString("Number of columns: ");
-    QSpinBox *spinbox2 = new QSpinBox(&dialog);
-    spinbox2->setMaximum(INT_MAX);
-    spinbox2->setMinimum(0);
-    form.addRow(columnStr, spinbox2);
-
-    // Value 3
-    QString maxValueStr = QString("Maximal value (not required): ");
-    QDoubleSpinBox *spinbox3 = new QDoubleSpinBox(&dialog);
-    spinbox3->setMaximum(DBL_MAX);
-    spinbox3->setMinimum(-DBL_MAX);
-    form.addRow(maxValueStr, spinbox3);
-    // Value 4
-    QString minValueStr = QString("Minimal value (not required): ");
-    QDoubleSpinBox *spinbox4 = new QDoubleSpinBox(&dialog);
-    spinbox4->setMaximum(DBL_MAX);
-    spinbox4->setMinimum(-DBL_MAX);
-    form.addRow(minValueStr, spinbox4);
-    // Add Cancel and OK button
-    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-        Qt::Horizontal, &dialog);
-    form.addRow(&buttonBox);
-    QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-    QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
-
+    GenerateDialog* dialog = new GenerateDialog();
     // Process when OK button is clicked
-    if (dialog.exec() == QDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         resetInterface();
-        int numberOfRows = (int) spinbox1->value();
-        int numberOfColumns = (int) spinbox2->value();
-        double maxValue = (double) spinbox3->value();
-        double minValue = (double) spinbox4->value();
+        int numberOfRows = dialog->getNumberOfRows();
+        int numberOfColumns = dialog->getNumberOfCols();
+        double maxValue = dialog->getMaxValue();
+        double minValue = dialog->getMinValue();
         bool enable = true;
         qDebug() << "[values]" << numberOfRows << numberOfColumns << maxValue << minValue;
         dataManager = new DataManager();

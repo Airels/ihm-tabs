@@ -41,8 +41,8 @@ Après avoir ouvert des données, via l'interface vous pourrez :
 - Trier des valeurs**
 - Selectionnez un filtre, le paramétrer et l'appliquer sur les valeurs séléctionées
 
-*Il est possible de séléctionner toute une colonne ou une ligne en cliquant sur l'entête des colonnes ou des lignes du tableau (simple clique)
-**Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
+> * Il est possible de séléctionner toute une colonne ou une ligne en cliquant sur l'entête des colonnes ou des lignes du tableau (simple clique)
+> ** Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
 
 # Ressources
 ## Sources

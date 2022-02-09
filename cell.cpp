@@ -22,6 +22,7 @@ double Cell::getvalue() {
 void Cell::setValue(double value) {
     this->value = value;
     this->setText(QString::number(value));
+    this->setData(value);
 }
 
 QColor Cell::getColor() {

@@ -11,6 +11,7 @@
 DataManager::DataManager()
 {
     cells = new QStandardItemModel();
+    cells->setSortRole(Qt::UserRole + 1);
 }
 
 DataManager::~DataManager() {
@@ -138,4 +139,9 @@ bool DataManager::generateRandomValue(int row, int column,double minValue, doubl
     }
     return true;
 
+}
+
+void DataManager::sort_model(int column, Qt::SortOrder order)
+{
+    cells->sort(column, order);
 }

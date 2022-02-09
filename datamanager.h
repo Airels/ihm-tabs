@@ -42,7 +42,26 @@ public:
      */
     QStandardItemModel * getCells();
 
+
+    /**
+     * @brief generateRandomValue When used, reset the data and generate random values.
+     * @param row Number of rows that will be generated
+     * @param column Number of columns that will be generated
+     * @author NICOLAI Guillaume
+     */
     void generateRandomValue(int row, int column);
+
+
+    /**
+     * @brief generateRandomValue When used, reset the data and generate random values between 2 values.
+     * @param row Number of rows that will be generated
+     * @param column Number of columns that will be generated
+     * @param minValue the minimal value to be randomly generated
+     * @param maxValue the maximal value to be randomly generated
+     * @param parent it's parent QWidget
+     * @return bool true if data generated successfully, false otherwise
+     * @author NICOLAI Guillaume
+     */
     bool generateRandomValue(int row, int column,double minValue, double maxValue,QWidget *parent);
 
     /**

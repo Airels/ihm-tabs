@@ -130,7 +130,7 @@ protected slots:
     /**
      * @brief activateFilter slot method called when the user interact with the filter selection menu in the ui.
      * It will load the selected filter into the ui.
-     * @author IKHLEF Eddy
+     * @author IKHLEF Eddy, NICOLAI Guillaume
      */
     void activateFilter();
     /**

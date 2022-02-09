@@ -11,6 +11,7 @@
 DataManager::DataManager()
 {
     cells = new QStandardItemModel();
+    cells->setSortRole(Qt::UserRole + 1);
 }
 
 DataManager::~DataManager() {

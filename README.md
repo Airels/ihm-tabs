@@ -49,7 +49,7 @@ Après avoir ouvert des données, via l'interface vous pourrez :
 Le code source est trouvable dans le dossier /src
 
 ## Scénarios et jeux de tests
-Des jeux de tests ainsi que des scénarios à appliquer sont trouvable dans le dossier /scenarios
+Des jeux de tests ainsi que des scénarios à appliquer sont trouvable dans le dossier /scenarios<br>
 Un document annexe permettant en détail de visualiser chaque étape du scénario avec image est trouvable dans le dossier /annexes
 
 ## Les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception

@@ -87,6 +87,13 @@ private:
      * @author IKHLEF Eddy
      */
     void initSignals();
+
+    /**
+     * @brief initViewManager will initialize the ViewManager if the model and the tableView are initialized.
+     * @param model the model to use
+     * @author BRICOUT Titouan
+     */
+    void initViewManager(QStandardItemModel *model);
     /**
      * @brief setEnabled allows to enable or disable user interaction with most of the ui.
      * @param value boolean value to enable (true) or disable (false).
@@ -99,6 +106,12 @@ private:
      * @author IKHLEF Eddy
      */
     void resetInterface();
+
+    /**
+     * @brief updateImage updates the image representation
+     * @author BRICOUT Titouan
+     */
+    void updateImage();
 
 
 protected slots:

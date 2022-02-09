@@ -90,8 +90,7 @@ public:
      * @brief sort_model Sort the model by the given column, assuming the items are sortable
      * @param column the column to sort by
      * @param order sort by ascending or descending order
-     * @authors BRICOUT Titouan
-     * @see viewmanager.h
+     * @author BRICOUT Titouan
      */
     void sort_model(int column, Qt::SortOrder order);
 private:

@@ -11,7 +11,7 @@
  *        By doing so, we can easily retrieve the data of a cell and update them, by doing so,
  *        correspondings fields herited from the QStandardItem will automatically be updated.
  *
- * @author Yohan VIZCAINO, Eddy IKHLEF
+ * @authors Yohan VIZCAINO, Eddy IKHLEF
  */
 class Cell: public QStandardItem
 {
@@ -40,9 +40,9 @@ public:
      */
     double getvalue();
     /**
-     * @brief setValue
+     * @brief setValue sets the value of the cell : sets the "value" member, the Text, and the custom Data
      * @param value the new value of the cell to be set.
-     * @author Eddy IKHLEF
+     * @authors Eddy IKHLEF, BRICOUT Titouan
      */
     void setValue(double value);
     /**

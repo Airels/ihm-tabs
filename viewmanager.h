@@ -25,6 +25,7 @@ signals:
 
 protected slots:
     void updateSelection(const QItemSelection &selected);
+    void requestSort(int column);
 
 private:
 

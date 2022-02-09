@@ -43,8 +43,8 @@ ViewManager::~ViewManager(){
 void ViewManager::setConnexions(){
     connect(myTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
             this, &ViewManager::updateSelection);
-    connect(myTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
-            this, SIGNAL(sortRequested(int, Qt::SortOrder)));
+//    connect(myTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)), this, SIGNAL(sortRequested(int, Qt::SortOrder)));
+    connect(myTableView->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(requestSort(int)));
 }
 
 
@@ -52,6 +52,16 @@ void ViewManager::setConnexions(){
 /*SLOTS*/
 void ViewManager::updateSelection(const QItemSelection &selected){
     emit ViewManager::selectionUpdated(selected.indexes());
+}
+
+void ViewManager::requestSort(int column)
+{
+    qDebug() << "[USER ACTION] sort request by double-click on column" << column << Qt::endl;
+    QHeaderView *header = myTableView->horizontalHeader();
+    if (header->isSortIndicatorShown()){
+        Qt::SortOrder order = header->sortIndicatorOrder();
+        emit sortRequested(column, order);
+    }
 }
 
 void ViewManager::updateImage(){

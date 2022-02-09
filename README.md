@@ -41,15 +41,16 @@ Après avoir ouvert des données, via l'interface vous pourrez :
 - Trier des valeurs**
 - Selectionnez un filtre, le paramétrer et l'appliquer sur les valeurs séléctionées
 
-> * Il est possible de séléctionner toute une colonne ou une ligne en cliquant sur l'entête des colonnes ou des lignes du tableau (simple clique)
-
-> ** Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
+>\* Il est possible de séléctionner toute une colonne ou une ligne en cliquant sur l'entête des colonnes ou des lignes du tableau (simple clique)
+\*\ Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
 
 # Ressources
 ## Sources
 Le code source est trouvable dans le dossier /src
+
 ## Scénarios et jeux de tests
 Des jeux de tests ainsi que des scénarios à appliquer sont trouvable dans le dossier /scenarios
 Un document annexe permettant en détail de visualiser chaque étape du scénario avec image est trouvable dans le dossier /annexes
+
 ## Les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception
 Un document contenant les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception est trouvable dans le dossier /annexes

@@ -139,3 +139,8 @@ bool DataManager::generateRandomValue(int row, int column,double minValue, doubl
     return true;
 
 }
+
+void DataManager::sort_model(int column, Qt::SortOrder order)
+{
+    cells->sort(column, order);
+}

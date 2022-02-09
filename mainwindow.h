@@ -140,5 +140,15 @@ protected slots:
      */
     void applyFilter();
 
+    /**
+     * @brief sortModel slot method called when the user clicks on the sort indicator of a column header in the table view
+     * It will call the corresponding sort method in the DataManager
+     * @param column the column to sort by
+     * @param order sort by ascending or descending order
+     * @author BRICOUT Titouan
+     * @see datamanager.h
+     */
+    void sortModel(int column, Qt::SortOrder order);
+
 };
 #endif // MAINWINDOW_H

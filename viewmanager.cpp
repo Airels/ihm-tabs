@@ -43,6 +43,8 @@ ViewManager::~ViewManager(){
 void ViewManager::setConnexions(){
     connect(myTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
             this, &ViewManager::updateSelection);
+    connect(myTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
+            this, SIGNAL(sortRequested(int, Qt::SortOrder)));
 }
 
 

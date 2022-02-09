@@ -17,10 +17,10 @@ identiques auront la même couleur et toutes les valeurs différentes auront des
 
 # Auteurs principaux
 
-BRICOUT Titouan
-IKHLEF Eddy
-NICOLAï Guillaume
-VICAÏNO Yohan
+- BRICOUT Titouan
+- IKHLEF Eddy
+- NICOLAï Guillaume
+- VICAÏNO Yohan
 
 # Utilisation
 
@@ -45,9 +45,10 @@ Après avoir ouvert des données, via l'interface vous pourrez :
 **Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
 
 # Ressources
-
 ## Sources
-
+Le code source est trouvable dans le dossier /src
 ## Scénarios et jeux de tests
-
+Des jeux de tests ainsi que des scénarios à appliquer sont trouvable dans le dossier /scenarios
+Un document annexe permettant en détail de visualiser chaque étape du scénario avec image est trouvable dans le dossier /annexes
 ## Les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception
+Un document contenant les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception est trouvable dans le dossier /annexes

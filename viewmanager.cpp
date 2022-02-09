@@ -41,19 +41,14 @@ ViewManager::~ViewManager(){
 
 
 void ViewManager::setConnexions(){
-    connect(myTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
-            this, &ViewManager::updateSelection);
-//    connect(myTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)), this, SIGNAL(sortRequested(int, Qt::SortOrder)));
+    connect(myTableView->selectionModel(),SIGNAL(selectionChanged(const QItemSelection&)),
+            this, SIGNAL(selectionUpdated(const QItemSelection&)));
     connect(myTableView->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(requestSort(int)));
 }
 
 
 
 /*SLOTS*/
-void ViewManager::updateSelection(const QItemSelection &selected){
-    emit ViewManager::selectionUpdated(selected.indexes());
-}
-
 void ViewManager::requestSort(int column)
 {
     qDebug() << "[USER ACTION] sort request by double-click on column" << column << Qt::endl;
@@ -69,13 +64,11 @@ void ViewManager::updateImage(){
         qDebug() << "myImage not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
         return;
     }
-    //qDebug() <<"image size :" << myImage->size() << Qt::endl;
     int columnCount = myModel->columnCount();
     int rowCount = myModel->rowCount();
     for (int x = 0;  x < columnCount; x++){
         for (int y = 0; y < rowCount; y++){
            Cell *currentCell = (Cell*) myModel->item(y, x);
-           //qDebug() << "set Pixel Color : x =" << x <<", y ="<<y<<"color =" <<currentCell->getColor()<<Qt::endl;
            myImage->setPixelColor(x, y, currentCell->getColor());
         }
     }

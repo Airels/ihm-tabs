@@ -210,11 +210,6 @@
           </column>
           <item>
            <property name="text">
-            <string>Modulo</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
             <string>Gradient</string>
            </property>
           </item>
@@ -226,6 +221,11 @@
           <item>
            <property name="text">
             <string>Conditionnal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Modulo</string>
            </property>
           </item>
          </widget>

@@ -152,7 +152,7 @@ void MainWindow::actionGenerate() {
 }
 
 void MainWindow::activateFilter() {
-    if(ui->_treeFilter->currentItem()->childCount() > 0) return;
+    //if(ui->_treeFilter->currentItem()->childCount() > 0) return; //add to only allows filters inside filters sections
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     qDebug() << "[USER ACTION] 'activated new filer from category " << categoryIndex << " and tool index " << toolIndex;

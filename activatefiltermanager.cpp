@@ -33,34 +33,21 @@ void ActivateFilterManager::createLayout() {
 }
 
 void ActivateFilterManager::handle(int categoryIndex, int toolIndex) {
+    if(categoryIndex != -1) return; //remove to allows filters inside filters sections
     if(this->name == nullptr) return;
     clearSelection();
-    switch(categoryIndex) {
-    case 0:
-        switch(toolIndex) {
-        case 0: //Gradient
-            openGradientColor();
-            break;
-        case 1: //Fixed
-            openFixedColor();
-            break;
-        case 2: //Conditional
-            openConditionalColor();
-            break;
-        case 3: //Modulo
-            openModuloColor();
-            break;
-        default:
-            break;
-        }
+    switch(toolIndex) {
+    case 0: //Gradient
+        openGradientColor();
         break;
-    case 1:
-        switch(toolIndex) {
-        case 0: //Sort
-            openSort();
-            break;
-        default: break;
-        }
+    case 1: //Fixed
+        openFixedColor();
+        break;
+    case 2: //Conditional
+        openConditionalColor();
+        break;
+    case 3: //Modulo
+        openModuloColor();
         break;
     default:
         break;
@@ -85,8 +72,6 @@ void ActivateFilterManager::updateSelection() {
 }
 
 void ActivateFilterManager::setFilterName(QString name) {
-    qDebug() << name;
-    qDebug() << &name;
     qDebug() << this->name;
     this->name = &name;
 }
@@ -118,58 +103,35 @@ void ActivateFilterManager::openSort() {
 
 
 void ActivateFilterManager::applyFilter(QModelIndexList* model, int categoryIndex, int toolIndex) {
-    qDebug() << "[USER ACTION] apply fixed color filter 2";
-    switch(categoryIndex) {
-    case 0:
-        switch(toolIndex) {
-        case 0: //Gradient Color
-            if (this->gradientColorDialog != nullptr) {
-                QColor colorMin = this->gradientColorDialog->getSelectedColorMin();
-                QColor colorMax = this->gradientColorDialog->getSelectedColorMax();
-                this->dataManager->apply_filter_min_max(*model, colorMin, colorMax);
-            }
-            break;
-        case 1: //Fixed Color
-            if (this->fixedColorDialog != nullptr) {
-                QColor color = this->fixedColorDialog->getSelectedColor();
-                this->dataManager->apply_filter_fixed_color(*model, color);
-            }
-            break;
-        case 2: //Condition
-            if (this->conditionalColorDialog != nullptr) {
-                QColor colorMin = this->conditionalColorDialog->getSelectedColorMin();
-                QColor colorEqual = this->conditionalColorDialog->getSelectedColorEqual();
-                QColor colorMax = this->conditionalColorDialog->getSelectedColorMax();
-                int value = this->conditionalColorDialog->getSelectedValue();
-                this->dataManager->apply_filter_simplified_condition(*model, value, colorMin, colorEqual, colorMax);
-            }
-            break;
-        case 3: //Modulo
-            if (this->moduloColorDialog != nullptr) {
-                QColor color = this->moduloColorDialog->getSelectedColor();
-                int value = this->moduloColorDialog->getSelectedValue();
-                this->dataManager->apply_filter_modulo(*model, value, color);
-            }
-            break;
-        default:
-            break;
+    if(categoryIndex != -1) return; //remove to allows filters inside filters sections
+    switch(toolIndex) {
+    case 0: //Gradient Color
+        if (this->gradientColorDialog != nullptr) {
+            QColor colorMin = this->gradientColorDialog->getSelectedColorMin();
+            QColor colorMax = this->gradientColorDialog->getSelectedColorMax();
+            this->dataManager->apply_filter_min_max(*model, colorMin, colorMax);
         }
         break;
-    case 1:
-        switch(toolIndex) {
-        case 0: //Sort
-            if (this->sortDialog != nullptr) {
-                int value = this->sortDialog->getSelectedValue();
-                if(value == 0) {
-                    //todo find a way to fetch col value or else add a column selection to the filter
-                    this->dataManager->getCells()->sort(0, Qt::AscendingOrder);
-                } else if(value == 1){
-                    this->dataManager->getCells()->sort(0, Qt::DescendingOrder);
-                }
-            }
-            break;
-        default:
-            break;
+    case 1: //Fixed Color
+        if (this->fixedColorDialog != nullptr) {
+            QColor color = this->fixedColorDialog->getSelectedColor();
+            this->dataManager->apply_filter_fixed_color(*model, color);
+        }
+        break;
+    case 2: //Condition
+        if (this->conditionalColorDialog != nullptr) {
+            QColor colorMin = this->conditionalColorDialog->getSelectedColorMin();
+            QColor colorEqual = this->conditionalColorDialog->getSelectedColorEqual();
+            QColor colorMax = this->conditionalColorDialog->getSelectedColorMax();
+            int value = this->conditionalColorDialog->getSelectedValue();
+            this->dataManager->apply_filter_simplified_condition(*model, value, colorMin, colorEqual, colorMax);
+        }
+        break;
+    case 3: //Modulo
+        if (this->moduloColorDialog != nullptr) {
+            QColor color = this->moduloColorDialog->getSelectedColor();
+            int value = this->moduloColorDialog->getSelectedValue();
+            this->dataManager->apply_filter_modulo(*model, value, color);
         }
         break;
     default:

@@ -6,6 +6,9 @@
 /**
  * @brief The SortDialog class is the one in charge of the QDialog to handle the sort filter.
  * @author IKHLEF Eddy
+ * @deprecated the sort is now implemented inside the tableView of the mainWindow and use a sorting function from dataManager.
+ * @see datamanager.h
+ * @see mainwindow.h
  */
 class SortDialog : public QDialog, private Ui::SortDialog
 {

@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     initSignals();
 
     this->imageWidget = new ImageWidget(this);
-    ui->_tabWidget->addTab(this->imageWidget, "Image representation");
+    ui->_tabWidget->addTab(this->imageWidget, "Image Representation");
 }
 
 MainWindow::~MainWindow()

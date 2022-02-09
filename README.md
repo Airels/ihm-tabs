@@ -1,4 +1,4 @@
-# Sujet
+# Sujet:
 
 Cette application permettra d’afficher des données matricielles générées aléatoirement ou provenant
 de fichiers de données CSV, XLSX ou autres formats sous une forme tabulaire. Un premier affichage
@@ -15,13 +15,39 @@ nombre de lignes et de colonnes, date de l’export…).
 Pour éviter toute confusion concernant la coloration et pour une colonne donnée, toutes les valeurs
 identiques auront la même couleur et toutes les valeurs différentes auront des couleurs différentes.
 
-# ROADMAP
+# Auteurs principaux
 
-## Définition des parties à effectuer
-- Lecture de fichier contenant des données matriciel
-- Ordonnancement des valeurs selon la ou les colones de son choix
-- Application de filtre de coloration dépendante des valeurs de la cellule
-  - Couleurs par défaut avec gradient de couleur selon la valeur
-  - Choix des couleurs
-- Export de l'image sous différent format
-- Description des données
+BRICOUT Titouan
+IKHLEF Eddy
+NICOLAï Guillaume
+VICAÏNO Yohan
+
+# Utilisation
+
+A l'ouverture de l'application, via le menu contextuel vous pourrez :
+- Ouvrir un fichier (csv, ou .ITabs, format créer pour le projet et pour sauvegarder)
+- Générer des données (Taille de la matrice de donnée, valeur min et max optionelles)
+
+Après avoir ouvert des données, via le menu contextuel vous pourrez :
+- Ouvrir un fichier (csv, ou .ITabs, format créer pour le projet et pour sauvegarder)
+- Fermer le fichier ouvert (retour à la fenêtre à l'état initiale)
+- Sauvegarder les données (sous format .ITabs, permettant de sauvegarder la structure et les filtres appliqués aux cellules)
+- Exporter les données (sous format .bmp, .jpeg, .png)
+- Générer des données (Taille de la matrice de donnéess, valeur min et max optionelles)
+
+Après avoir ouvert des données, via l'interface vous pourrez :
+- Visualisez les données sous forme de tableau et/ou sous forme d'image
+- Selectionnez des valeurs (ou toutes les valeurs)*
+- Trier des valeurs**
+- Selectionnez un filtre, le paramétrer et l'appliquer sur les valeurs séléctionées
+
+*Il est possible de séléctionner toute une colonne ou une ligne en cliquant sur l'entête des colonnes ou des lignes du tableau (simple clique)
+**Il est possible de trier les valeurs du tableau d'une colonne en double cliquant sur l'entête des colonnes du tableau (double clique)
+
+# Ressources
+
+## Sources
+
+## Scénarios et jeux de tests
+
+## Les diagrammes de cas d’utilisation et de navigation ainsi que la modélisation des IHM et leurs événements émis et les slots d’interception

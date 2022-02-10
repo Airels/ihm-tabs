@@ -182,6 +182,7 @@ void MainWindow::applyFilter() {
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
     updateImage();
+    viewManager->getTableView()->clearSelection();
 }
 
 void MainWindow::sortModel(int column, Qt::SortOrder order)

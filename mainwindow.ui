@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>757</height>
+    <height>835</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -103,6 +103,12 @@
          </property>
          <item row="0" column="0">
           <widget class="QTableView" name="_tableView">
+           <property name="baseSize">
+            <size>
+             <width>1000</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
@@ -140,20 +146,20 @@
         <bool>true</bool>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>200</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>220</width>
+         <width>200</width>
          <height>16777215</height>
         </size>
        </property>
@@ -187,6 +193,12 @@
          <widget class="QTreeWidget" name="_treeFilter">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
           <property name="indentation">
            <number>0</number>
@@ -235,10 +247,16 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>400</height>
+            <height>500</height>
            </size>
           </property>
           <property name="maximumSize">

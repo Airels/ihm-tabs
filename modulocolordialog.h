@@ -1,13 +1,13 @@
-#ifndef FIXEDCOLORDIALOG_H
-#define FIXEDCOLORDIALOG_H
+#ifndef MODULOCOLORDIALOG_H
+#define MODULOCOLORDIALOG_H
 
-#include "ui_fixedcolordialog.h"
+#include "ui_modulocolordialog.h"
 
 /**
- * @brief The FixedColorDialog class is the one in charge of the QDialog to handle the "fixed color" filter.
+ * @brief The ModuloColorDialog class is the one in charge of the QDialog to handle the "modulo color" filter.
  * @author IKHLEF Eddy
  */
-class FixedColorDialog : public QDialog, private Ui::FixedColorDialog
+class ModuloColorDialog : public QDialog, private Ui::ModuloColorDialog
 {
     Q_OBJECT
 
@@ -17,14 +17,20 @@ public:
      * @param parent its parent QWidget.
      * @author IKHLEF Eddy
      */
-    FixedColorDialog(QWidget *parent = nullptr);
-    ~FixedColorDialog();
+    explicit ModuloColorDialog(QWidget *parent = nullptr);
+    ~ModuloColorDialog();
     /**
      * @brief getSelectedColor
      * @return the selected color as a QColor.
      * @author IKHLEF Eddy
      */
     QColor getSelectedColor();
+    /**
+     * @brief getSelectedValue
+     * @return the selected integer value that correspond to the right side member of the modulo operand.
+     * @author IKHLEF Eddy
+     */
+    int getSelectedValue();
 
 protected slots:
     /**
@@ -35,4 +41,4 @@ protected slots:
     void colorChanged();
 };
 
-#endif // FIXEDCOLORDIALOG_H
+#endif // MODULOCOLORDIALOG_H

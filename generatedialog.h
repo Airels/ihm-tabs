@@ -7,7 +7,7 @@
 #include <QDoubleSpinBox>
 
 /**
- * @brief The GenerateDialog class
+ * @brief The GenerateDialog class, used to create a window that ask information to the user.
  * @author NICOLAI Guillaume (refractored by IKHLEF Eddy)
  */
 class GenerateDialog : public QDialog, private Ui::GenerateDialog
@@ -18,7 +18,7 @@ public:
     /**
      * @brief GenerateDialog instanciates the dialog and constructs its widgets
      * @param parent its parent QWidget.
-     * @author NICOLAI GUillaume
+     * @author NICOLAI Guillaume
      */
     explicit GenerateDialog(QWidget *parent = nullptr);
     /**

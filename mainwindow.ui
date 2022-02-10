@@ -38,11 +38,17 @@
         <height>20</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="handleWidth">
-       <number>0</number>
+       <number>5</number>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
       </property>
       <widget class="QTabWidget" name="_tabWidget">
        <property name="enabled">
@@ -56,7 +62,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>300</width>
          <height>100</height>
         </size>
        </property>
@@ -153,7 +159,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>150</width>
          <height>100</height>
         </size>
        </property>
@@ -201,7 +207,7 @@
            </sizepolicy>
           </property>
           <property name="indentation">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="rootIsDecorated">
            <bool>false</bool>

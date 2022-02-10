@@ -51,7 +51,7 @@ void ViewManager::setConnexions(){
 /*SLOTS*/
 void ViewManager::requestSort(int column)
 {
-    qDebug() << "[USER ACTION] sort request by double-click on column" << column << Qt::endl;
+    qDebug() << "[USER ACTION] sort request by double-click on column" << column;
     QHeaderView *header = myTableView->horizontalHeader();
     if (header->isSortIndicatorShown()){
         Qt::SortOrder order = header->sortIndicatorOrder();
@@ -61,7 +61,7 @@ void ViewManager::requestSort(int column)
 
 void ViewManager::updateImage(){
     if (myImage == nullptr){
-        qDebug() << "myImage not initialized" << Qt::endl;//plus propre avec une erreur, mais pas nécessaire
+        qDebug() << "myImage not initialized";//plus propre avec une erreur, mais pas nécessaire
         return;
     }
     int columnCount = myModel->columnCount();

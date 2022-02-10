@@ -11,13 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    qDebug() << "mainWindowConstructor" << Qt::endl;
+    qDebug() << "mainWindowConstructor";
     dataManager = nullptr;
     viewManager = nullptr;
     fileManager = new FileManager(this);
     activateFilterManager = nullptr;
     ui->setupUi(this);
-    qDebug() << "setupUI" << Qt::endl;
+    qDebug() << "setupUI";
     this->setWindowIcon(QIcon(":/icon.png"));
     initAttributes();
     initSignals();
@@ -36,7 +36,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initAttributes() {
-    qDebug() << "init attributes" << Qt::endl;
+    qDebug() << "init attributes";
 
 
     _actionOpenFile = ui->_menuFile->addAction("Open File");
@@ -65,7 +65,7 @@ void MainWindow::initSignals() {
 void MainWindow::initViewManager(QStandardItemModel *model)
 {
     if (model == nullptr){
-        qDebug() << "model not yet initialized" << Qt::endl;
+        qDebug() << "model not yet initialized";
         return;
     }
     viewManager = new ViewManager(ui->_tableView, model);
@@ -186,7 +186,7 @@ void MainWindow::applyFilter() {
 
 void MainWindow::sortModel(int column, Qt::SortOrder order)
 {
-    qDebug() << "[USER ACTION] sort request on column" << column << "in order" << order << Qt::endl;
+    qDebug() << "[USER ACTION] sort request on column" << column << "in order" << order;
     if (dataManager != nullptr){
         dataManager->sort_model(column, order);
     }

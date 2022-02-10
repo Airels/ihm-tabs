@@ -62,6 +62,18 @@ void MainWindow::initSignals() {
     connect(ui->_applyFilterBtn, SIGNAL(clicked()), this, SLOT(applyFilter()));
 }
 
+void MainWindow::initViewManager(QStandardItemModel *model)
+{
+    if (model == nullptr){
+        qDebug() << "model not yet initialized" << Qt::endl;
+        return;
+    }
+    viewManager = new ViewManager(ui->_tableView, model);
+    imageWidget->setImage(viewManager->getImage());
+    connect(viewManager, SIGNAL(sortRequested(int, Qt::SortOrder)), this, SLOT(sortModel(int, Qt::SortOrder)));
+    updateImage(); //maybe not useful
+}
+
 void MainWindow::resetInterface() {
     //(qobject_cast<QStandardItemModel *>(ui->_tableView->model()))->setColumnCount(0);
     //(qobject_cast<QStandardItemModel *>(ui->_tableView->model()))->setRowCount(0);
@@ -72,6 +84,12 @@ void MainWindow::resetInterface() {
     for(QObject *child : ui->_activeFilter->children()) {
         child->deleteLater();
     }
+}
+
+void MainWindow::updateImage()
+{
+    viewManager->updateImage();
+    imageWidget->reload();
 }
 
 void MainWindow::setEnabled(bool value) {
@@ -95,9 +113,7 @@ void MainWindow::actionOpenFile() {
         QStandardItemModel *model = dataManager->getCells();
         resetInterface();
         setEnabled(true);
-        viewManager = new ViewManager(ui->_tableView, model);
-        imageWidget->setImage(viewManager->getImage());
-        connect(viewManager, SIGNAL(sortRequested(int, Qt::SortOrder)), this, SLOT(sortModel(int, Qt::SortOrder)));
+        initViewManager(model);
     }
 }
 
@@ -145,9 +161,7 @@ void MainWindow::actionGenerate() {
         QStandardItemModel *model = dataManager->getCells();
         setEnabled(enable);
         activateFilterManager = new ActivateFilterManager(dataManager, ui->_activeFilter, ui->_applyFilterBtn);
-        viewManager = new ViewManager(ui->_tableView, model);
-        imageWidget->setImage(viewManager->getImage());
-        connect(viewManager, SIGNAL(sortRequested(int, Qt::SortOrder)), this, SLOT(sortModel(int, Qt::SortOrder)));
+        initViewManager(model);
     }
 }
 
@@ -167,8 +181,7 @@ void MainWindow::applyFilter() {
     int categoryIndex = ui->_treeFilter->indexOfTopLevelItem(ui->_treeFilter->currentItem()->parent());
     int toolIndex = ui->_treeFilter->currentIndex().row();
     activateFilterManager->applyFilter(&model, categoryIndex, toolIndex);
-    viewManager->updateImage();
-    imageWidget->reload();
+    updateImage();
 }
 
 void MainWindow::sortModel(int column, Qt::SortOrder order)
@@ -177,6 +190,5 @@ void MainWindow::sortModel(int column, Qt::SortOrder order)
     if (dataManager != nullptr){
         dataManager->sort_model(column, order);
     }
-    viewManager->updateImage();
-    imageWidget->reload();
+    updateImage();
 }
